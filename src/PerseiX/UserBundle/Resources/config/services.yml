@@ -1,0 +1,4 @@
+services:
+#    persei_x_user.example:
+#        class: PerseiX\UserBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

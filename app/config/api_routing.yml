@@ -1,0 +1,5 @@
+persei_x_project:
+    resource: "@PerseiXProjectBundle/Resources/config/routing/routing.yml"
+
+persei_x_user:
+    resource: "@PerseiXUserBundle/Resources/routing/routing.yml"

@@ -1,0 +1,22 @@
+PerseiX\UserBundle\Representation\UserRepresentation:
+    exclusion_policy: ALL
+    properties:
+        id:
+            type: int
+            expose: true
+
+        username:
+            type: string
+            expose: true
+
+        email:
+            type: string
+            expose: true
+
+        enabled:
+            type: boolean
+            expose: true
+
+        lastLogin:
+            type: DateTime<'Y-m-d'>
+            expose: true

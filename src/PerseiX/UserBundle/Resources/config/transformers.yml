@@ -1,0 +1,5 @@
+services:
+    perseix_user_transformer.user_transformer:
+        class: PerseiX\UserBundle\Transformer\UserTransformer
+        tags:
+            - { name: api.transformer }

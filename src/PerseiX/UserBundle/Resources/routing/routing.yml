@@ -1,0 +1,7 @@
+index:
+    path: /me
+    methods:
+        - GET
+    defaults:
+        _controller: PerseiXUserBundle:PerseixUser:me
+        _format: json

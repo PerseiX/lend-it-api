@@ -1,11 +1,6 @@
-persei_x_user:
-    resource: "@PerseiXUserBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-persei_x_project:
-    resource: "@PerseiXProjectBundle/Resources/config/routing/routing.yml"
-    prefix:   "/api"
+api:
+    resource: "api_routing.yml"
+    prefix: "/api"
 
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"

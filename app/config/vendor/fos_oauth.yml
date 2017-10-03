@@ -4,3 +4,5 @@ fos_oauth_server:
     access_token_class:  PerseiX\UserBundle\Entity\AccessToken
     refresh_token_class: PerseiX\UserBundle\Entity\RefreshToken
     auth_code_class:     PerseiX\UserBundle\Entity\AuthCode
+    service:
+        user_provider:  fos_user.user_provider.username

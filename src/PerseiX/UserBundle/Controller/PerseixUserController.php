@@ -2,18 +2,19 @@
 
 namespace PerseiX\UserBundle\Controller;
 
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
+use ApiBundle\Controller\AbstractApiController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 /**
  * Class PerseixUserController
  * @package PerseiX\UserBundle\Controller
  */
-class PerseixUserController extends Controller
+class PerseixUserController extends AbstractApiController
 {
 	/**
+	 * @param Request $request
 	 *
 	 * @ApiDoc(
 	 *     section="User",
@@ -22,10 +23,10 @@ class PerseixUserController extends Controller
 	 *     output="PerseiX\UserBundle\Representation\UserRepresentation"
 	 * )
 	 * @return Response
-	 *
 	 */
 	public function meAction(Request $request)
 	{
-		die;
+		return $this->representationResponse($this->getUser());
 	}
+
 }

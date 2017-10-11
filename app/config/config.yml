@@ -5,6 +5,7 @@ imports:
     - { resource: vendor/nelmio_api_doc.yml }
     - { resource: vendor/fos_oauth.yml }
     - { resource: vendor/fos_user.yml }
+    - { resource: vendor/fos_rest.yml }
 
 
 framework:

@@ -1,7 +1,0 @@
-#index:
-#    path: /
-#    methods:
-#        - GET
-#    defaults:
-#        _controller: PerseiXProjectBundle:Default:index
-#        _format: json

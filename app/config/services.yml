@@ -4,3 +4,5 @@ services:
         autoconfigure: false
         public: false
 
+    jms_serializer.naming_strategy:
+        class: 'JMS\Serializer\Naming\IdenticalPropertyNamingStrategy'

@@ -3,6 +3,8 @@
 namespace PerseiX\UserBundle\Controller;
 
 use ApiBundle\Controller\AbstractApiController;
+use PerseiX\UserBundle\Form\RegistryType;
+use PerseiX\UserBundle\Model\RegistryModel;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
@@ -14,8 +16,6 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 class PerseixUserController extends AbstractApiController
 {
 	/**
-	 * @param Request $request
-	 *
 	 * @ApiDoc(
 	 *     section="User",
 	 *     resource=true,
@@ -24,9 +24,47 @@ class PerseixUserController extends AbstractApiController
 	 * )
 	 * @return Response
 	 */
-	public function meAction(Request $request)
+	public function meAction()
 	{
 		return $this->representationResponse($this->getUser());
 	}
 
+	/**
+	 * @param Request $request
+	 * @ApiDoc(
+	 *     section="User",
+	 *     resource=true,
+	 *     description="Register new user",
+	 *     output="PerseiX\UserBundle\Representation\UserRepresentation",
+	 *     parameters={
+	 *          {"name"="username", "dataType"="string", "required"=true, "description"="Username"},
+	 *          {"name"="email", "dataType"="email", "required"=true, "description"="Email"},
+	 *          {"name"="password[first]", "dataType"="array", "required"=true, "description"="Password"},
+	 *          {"name"="password[second]", "dataType"="array", "required"=true, "description"="Repeated password"}
+	 *     }
+	 * )
+	 *
+	 * @return Response
+	 */
+	public function registryAction(Request $request)
+	{
+		$form = $this->createForm(RegistryType::class);
+		$form->handleRequest($request);
+
+		if (false === $form->isSubmitted()) {
+			$form->submit($request->request->all());
+		}
+
+		if (true === $form->isValid()) {
+			$user    = $this->get('perseix_user_manager.reqistry_manager')->registry($form->getData());
+			$manager = $this->getDoctrine()->getManager();
+
+			$manager->persist($user);
+			$manager->flush();
+
+			return $this->representationResponse($user);
+		} else {
+			return $this->formErrorsResponse($form);
+		}
+	}
 }

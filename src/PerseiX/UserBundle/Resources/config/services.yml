@@ -1,4 +1,12 @@
 services:
-#    persei_x_user.example:
-#        class: PerseiX\UserBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    perseix_user_manager.reqistry_manager:
+        class: PerseiX\UserBundle\Manager\RegistryManager
+        arguments:
+            - '@fos_user.user_manager.default'
+            - '@perseix_user_service.registration'
+
+    perseix_user_service.registration:
+        class: PerseiX\UserBundle\Service\Registration
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@security.encoder_factory'

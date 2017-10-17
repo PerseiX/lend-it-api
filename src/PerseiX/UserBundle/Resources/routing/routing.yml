@@ -1,7 +1,16 @@
-index:
+user_me:
     path: /me
     methods:
         - POST
     defaults:
         _controller: PerseiXUserBundle:PerseixUser:me
+        _format: json
+
+
+user_registry:
+    path: /registry
+    methods:
+        - POST
+    defaults:
+        _controller: PerseiXUserBundle:PerseixUser:registry
         _format: json

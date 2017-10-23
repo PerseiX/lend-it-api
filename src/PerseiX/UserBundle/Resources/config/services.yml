@@ -10,3 +10,10 @@ services:
         arguments:
             - '@doctrine.orm.entity_manager'
             - '@security.encoder_factory'
+
+    perseix_user_validator.unique_field:
+        class: PerseiX\UserBundle\Validator\Constraints\UniqueFieldValidator
+        arguments:
+            - '@doctrine.orm.entity_manager'
+        tags:
+            - { name: validator.constraint_validator }

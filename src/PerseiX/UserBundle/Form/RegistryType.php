@@ -27,7 +27,8 @@ class RegistryType extends AbstractType
 		$builder
 			->add('username', TextType::class)
 			->add('password', RepeatedType::class, [
-				'type' => PasswordType::class
+				'type' => PasswordType::class,
+				'invalid_message' => 'Podane hasła nie są identyczne.'
 			])
 			->add('email', EmailType::class);
 	}

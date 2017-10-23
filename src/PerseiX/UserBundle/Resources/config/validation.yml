@@ -4,6 +4,9 @@ PerseiX\UserBundle\Model\RegistryModel:
             - NotBlank: ~
             - NotNull: ~
             - Email: ~
+            - PerseiX\UserBundle\Validator\Constraints\UniqueField:
+                entityClass: PerseiX\UserBundle\Entity\User
+                field: email
 
         username:
             - NotBlank: ~
@@ -13,6 +16,9 @@ PerseiX\UserBundle\Model\RegistryModel:
                 max: 16
                 minMessage: "Login jest zbyt krótki. Minimalna liczba znaków wynosi 4."
                 maxMessage: "Login jest zbyt długi. Maksymalna liczba znaków wynosi 16."
+            - PerseiX\UserBundle\Validator\Constraints\UniqueField:
+                entityClass: PerseiX\UserBundle\Entity\User
+                field: username
 
         password:
             - NotBlank: ~

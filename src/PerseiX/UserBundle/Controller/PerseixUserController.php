@@ -54,7 +54,7 @@ class PerseixUserController extends AbstractApiController
 		if (false === $form->isSubmitted()) {
 			$form->submit($request->request->all());
 		}
-
+//		$this->get('doctrine.orm.entity_manager')
 		if (true === $form->isValid()) {
 			$user    = $this->get('perseix_user_manager.reqistry_manager')->registry($form->getData());
 			$manager = $this->getDoctrine()->getManager();

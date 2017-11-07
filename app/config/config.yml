@@ -6,6 +6,7 @@ imports:
     - { resource: vendor/fos_oauth.yml }
     - { resource: vendor/fos_user.yml }
     - { resource: vendor/fos_rest.yml }
+    - { resource: vendor/hateos.yml }
 
 
 framework:

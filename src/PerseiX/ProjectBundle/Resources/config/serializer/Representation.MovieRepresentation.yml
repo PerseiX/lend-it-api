@@ -1,0 +1,39 @@
+PerseiX\ProjectBundle\Representation\MovieRepresentation:
+    exclusion_policy: ALL
+    properties:
+        id:
+            type: integer
+            accessor:
+                getter: getId
+
+        title:
+            type: string
+            accessor:
+                getter: getTitle
+
+        description:
+            type: string
+            accessor:
+                getter: getDescription
+
+        genreIds:
+            type: array
+            accessor:
+                getter: getGenreIds
+
+        releaseAt:
+            type: DateTime<'Y-m-d'>
+            expose: true
+            accessor:
+                getter: getReleaseAt
+
+        language:
+            type: string
+            accessor:
+                getter: getLanguage
+
+        imagePath:
+            type: string
+            accessor:
+                getter: getImagePath
+

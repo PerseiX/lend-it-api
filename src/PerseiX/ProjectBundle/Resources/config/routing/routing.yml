@@ -1,0 +1,7 @@
+prseix_project_movies:
+    path: /movies
+    methods:
+        - GET
+    defaults:
+        _controller: PerseiXProjectBundle:Movies:collection
+        _format: json

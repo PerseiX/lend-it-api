@@ -11,19 +11,20 @@ class AppKernel extends Kernel
 			new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 			new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
 			new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
+			new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
 			new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
 			new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
 			new Symfony\Bundle\SecurityBundle\SecurityBundle(),
 			new Symfony\Bundle\MonologBundle\MonologBundle(),
 			new PerseiX\ProjectBundle\PerseiXProjectBundle(),
 			new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
-			new FOS\UserBundle\FOSUserBundle(),
+			new JMS\SerializerBundle\JMSSerializerBundle(),
 			new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
 			new Symfony\Bundle\TwigBundle\TwigBundle(),
 			new PerseiX\UserBundle\PerseiXUserBundle(),
-			new ApiBundle\ApiBundle(),
+			new FOS\UserBundle\FOSUserBundle(),
 			new FOS\RestBundle\FOSRestBundle(),
-			new JMS\SerializerBundle\JMSSerializerBundle(),
+			new ApiBundle\ApiBundle(),
 		];
 
 		if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

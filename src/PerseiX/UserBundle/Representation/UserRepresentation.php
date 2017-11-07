@@ -116,19 +116,19 @@ class UserRepresentation implements RepresentationInterface
 	}
 
 	/**
-	 * @return \DateTime
+	 * @return \DateTime|null
 	 */
-	public function getLastLogin(): \DateTime
+	public function getLastLogin(): ?\DateTime
 	{
 		return $this->lastLogin;
 	}
 
 	/**
-	 * @param \DateTime $lastLogin
+	 * @param \DateTime|null $lastLogin
 	 *
 	 * @return UserRepresentation
 	 */
-	public function setLastLogin(\DateTime $lastLogin): UserRepresentation
+	public function setLastLogin(\DateTime $lastLogin = null): UserRepresentation
 	{
 		$this->lastLogin = $lastLogin;
 

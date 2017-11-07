@@ -19,6 +19,10 @@ security:
             pattern:    ^/api/registry
             anonymous: true
 
+        movies:
+            pattern:    ^/api/movies
+            anonymous: true
+
         api:
             pattern:    ^/api
             fos_oauth:  true
@@ -28,4 +32,5 @@ security:
     access_control:
         - { path: ^/api/doc, roles: [ IS_AUTHENTICATED_ANONYMOUSLY ] }
         - { path: ^/api/registry, roles: [ IS_AUTHENTICATED_ANONYMOUSLY ] }
+        - { path: ^/api/movies, roles: [ IS_AUTHENTICATED_ANONYMOUSLY ] }
         - { path: ^/api, roles: [ ROLE_ADMIN ] }

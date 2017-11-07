@@ -1,0 +1,30 @@
+PerseiX\UserBundle\Representation\UserRepresentation:
+    exclusion_policy: ALL
+    properties:
+        id:
+            type: integer
+            accessor:
+                getter: getId
+
+        username:
+            type: string
+            accessor:
+                getter: getUsername
+
+        email:
+            type: string
+            accessor:
+                getter: getEmail
+
+        enabled:
+            type: boolean
+            accessor:
+                getter: isEnabled
+
+        lastLogin:
+            type: DateTime<'Y-m-d'>
+            expose: true
+            accessor:
+                getter: getLastLogin
+
+

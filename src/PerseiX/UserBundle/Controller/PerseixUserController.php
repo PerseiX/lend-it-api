@@ -26,7 +26,7 @@ class PerseixUserController extends AbstractApiController
 	 */
 	public function meAction()
 	{
-		return $this->representationResponse($this->getUser());
+		return $this->representationResponse($this->transform($this->getUser()));
 	}
 
 	/**

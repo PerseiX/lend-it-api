@@ -4,6 +4,11 @@ fos_rest:
     routing_loader:
         default_format: json
         include_format: true
+    serializer:
+        serialize_null: true
     body_converter:
         enabled: false
         validate: true
+
+sensio_framework_extra:
+    view:    { annotations: true }

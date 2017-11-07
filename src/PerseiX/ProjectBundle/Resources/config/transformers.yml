@@ -1,0 +1,11 @@
+services:
+    perseix_transformer.movie_transformer:
+        class: PerseiX\ProjectBundle\Transformer\MovieTransformer
+        tags:
+            - { name: api.transformer }
+
+    preseix_transformer_collection.movie_collection_transformer:
+        class: PerseiX\ProjectBundle\Transformer\Collection\MovieCollectionTransformer
+        parent: 'abstract.transformer'
+        tags:
+            - { name: api.transformer }

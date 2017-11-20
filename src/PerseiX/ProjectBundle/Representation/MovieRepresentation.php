@@ -108,7 +108,7 @@ class MovieRepresentation implements RepresentationInterface
 	/**
 	 * @return array
 	 */
-	public function getGenreIds(): array
+	public function getGenreIds(): ?array
 	{
 		return $this->genreIds;
 	}

@@ -1,0 +1,2 @@
+PerseiX\ProjectBundle\Representation\MovieRepresentationCollection:
+    exclusion_policy: ALL

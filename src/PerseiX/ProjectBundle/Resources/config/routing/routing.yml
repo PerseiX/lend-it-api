@@ -1,7 +1,17 @@
-prseix_project_movies:
+perseix_project_movies:
     path: /movies
     methods:
         - GET
     defaults:
         _controller: PerseiXProjectBundle:Movies:collection
         _format: json
+
+perseix_project_single_movie:
+    path: /movie/{movieId}
+    methods:
+        - GET
+    defaults:
+        _controller: PerseiXProjectBundle:Movies:single
+        _format: json
+    requirements:
+        movieId: \d+

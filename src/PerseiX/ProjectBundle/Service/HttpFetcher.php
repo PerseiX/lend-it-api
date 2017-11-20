@@ -10,6 +10,8 @@ use GuzzleHttp\Client;
  */
 class HttpFetcher
 {
+	const COLLECTION_URL = 'https://api.themoviedb.org/3/movie/popular?api_key=684c5d83e02a6730d4886694f0bc4fbe&language=en-US&query=string&page=2&include_adult=true';
+
 	/**
 	 * @var Client
 	 */
@@ -27,7 +29,20 @@ class HttpFetcher
 
 	public function fetch()
 	{
-		return $this->client->get('https://api.themoviedb.org/3/search/movie?api_key=684c5d83e02a6730d4886694f0bc4fbe&language=en-US&query=string&page=1&include_adult=false')
-		                    ->getBody()->getContents();
+		return $this->client
+			->get(self::COLLECTION_URL)
+			->getBody()->getContents();
+	}
+
+	/**
+	 * @param int $id
+	 *
+	 * @return string
+	 */
+	public function fetchSingle(int $id)
+	{
+		return $this->client
+			->get('https://api.themoviedb.org/3/movie/' . $id . '?api_key=684c5d83e02a6730d4886694f0bc4fbe')
+			->getBody()->getContents();
 	}
 }

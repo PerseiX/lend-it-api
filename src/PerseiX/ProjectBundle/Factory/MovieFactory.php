@@ -19,7 +19,7 @@ class MovieFactory
 			->setLanguage($object->original_language)
 			->setTitle($object->title)
 			->setReleaseAt(new \DateTime($object->release_date))
-			->setGenreIds($object->genre_ids)
+//			->setGenreIds($object->genre_ids)
 			->setDescription($object->overview)
 			->setImagePath(ImagePathResolver::resolve($object->poster_path));
 

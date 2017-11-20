@@ -5,6 +5,7 @@ namespace PerseiX\ProjectBundle\Resolver;
 use PerseiX\ProjectBundle\Factory\MovieFactory;
 use PerseiX\ProjectBundle\Model\MovieCollection;
 use PerseiX\ProjectBundle\Service\HttpFetcher;
+use PerseiX\ProjectBundle\Service\ProxyFetcher;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
@@ -16,9 +17,9 @@ use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 class MovieCollectionArgumentResolver implements ArgumentValueResolverInterface
 {
 	/**
-	 * @var HttpFetcher
+	 * @var ProxyFetcher
 	 */
-	private $httpFetcher;
+	private $proxyFetcher;
 
 	/**
 	 * @var MovieFactory
@@ -28,12 +29,12 @@ class MovieCollectionArgumentResolver implements ArgumentValueResolverInterface
 	/**
 	 * MovieCollectionArgumentResolver constructor.
 	 *
-	 * @param HttpFetcher  $httpFetcher
+	 * @param ProxyFetcher  $proxyFetcher
 	 * @param MovieFactory $movieFactory
 	 */
-	public function __construct(HttpFetcher $httpFetcher, MovieFactory $movieFactory)
+	public function __construct(ProxyFetcher $proxyFetcher, MovieFactory $movieFactory)
 	{
-		$this->httpFetcher  = $httpFetcher;
+		$this->proxyFetcher  = $proxyFetcher;
 		$this->movieFactory = $movieFactory;
 	}
 
@@ -56,7 +57,7 @@ class MovieCollectionArgumentResolver implements ArgumentValueResolverInterface
 	 */
 	public function resolve(Request $request, ArgumentMetadata $argument)
 	{
-		$results    = json_decode($this->httpFetcher->fetch())->results;
+		$results    = json_decode($this->proxyFetcher->fetch())->results;
 		$collection = [];
 		foreach ($results as $result) {
 			$collection[] = $this->movieFactory->create($result);

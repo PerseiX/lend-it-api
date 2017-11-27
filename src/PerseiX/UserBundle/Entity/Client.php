@@ -19,6 +19,11 @@ class Client extends BaseClient
 	protected $id;
 
 	/**
+	 * @ORM\OneToMany(targetEntity="PerseiX\UserBundle\Entity\RefreshToken", mappedBy="client")
+	 */
+	protected $user;
+
+	/**
 	 * Client constructor.
 	 */
 	public function __construct()

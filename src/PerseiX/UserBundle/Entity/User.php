@@ -19,6 +19,20 @@ class User extends BaseUser
 	protected $id;
 
 	/**
+	 * @ORM\OneToMany(targetEntity="PerseiX\UserBundle\Entity\RefreshToken", mappedBy="user")
+	 */
+	protected $refreshToken;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="PerseiX\UserBundle\Entity\AuthCode", mappedBy="user")
+	 */
+	protected $authCode;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="PerseiX\UserBundle\Entity\AccessToken", mappedBy="user")
+	 */
+	protected $accessToken;
+	/**
 	 * User constructor.
 	 */
 	public function __construct()

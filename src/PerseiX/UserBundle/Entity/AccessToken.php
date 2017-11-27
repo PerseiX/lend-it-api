@@ -25,7 +25,7 @@ class AccessToken extends BaseAccessToken
 	protected $client;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="PerseiX\UserBundle\Entity\User")
+	 * @ORM\ManyToOne(targetEntity="PerseiX\UserBundle\Entity\User", inversedBy="accessToken")
 	 */
 	protected $user;
 }

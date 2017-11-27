@@ -25,7 +25,7 @@ class AppKernel extends Kernel
 			new FOS\UserBundle\FOSUserBundle(),
 			new FOS\RestBundle\FOSRestBundle(),
 			new ApiBundle\ApiBundle(),
-			new Snc\RedisBundle\SncRedisBundle()
+//			new Snc\RedisBundle\SncRedisBundle()
 		];
 
 		if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

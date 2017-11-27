@@ -7,17 +7,18 @@ services:
         arguments:
             - '@guzzle_client'
 
-    perseix_project_service.proxy_fetcher:
-        class: PerseiX\ProjectBundle\Service\ProxyFetcher
-        arguments:
-            - '@snc_redis.cache_client'
-            - '@perseix_project_service.http_fetcher'
+#    perseix_project_service.proxy_fetcher:
+#        class: PerseiX\ProjectBundle\Service\ProxyFetcher
+#        arguments:
+#            - '@snc_redis.cache_client'
+#            - '@perseix_project_service.http_fetcher'
 
     perseix_project_resolver.movie_collection_argument_resolver:
         class: PerseiX\ProjectBundle\Resolver\MovieCollectionArgumentResolver
         arguments:
-            - '@perseix_project_service.proxy_fetcher'
+#            - '@perseix_project_service.proxy_fetcher'
             - '@perseix_project_factory.movie_factory'
+            - '@perseix_project_service.http_fetcher'
         tags:
             - { name: controller.argument_value_resolver }
 

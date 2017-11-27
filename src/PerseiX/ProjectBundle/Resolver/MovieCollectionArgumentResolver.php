@@ -17,26 +17,27 @@ use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 class MovieCollectionArgumentResolver implements ArgumentValueResolverInterface
 {
 	/**
-	 * @var ProxyFetcher
-	 */
-	private $proxyFetcher;
-
-	/**
 	 * @var MovieFactory
 	 */
 	private $movieFactory;
 
 	/**
+	 * @var HttpFetcher
+	 */
+	private $httpFetcher;
+
+	/**
 	 * MovieCollectionArgumentResolver constructor.
 	 *
-	 * @param ProxyFetcher  $proxyFetcher
 	 * @param MovieFactory $movieFactory
+	 * @param HttpFetcher  $httpFetcher
 	 */
-	public function __construct(ProxyFetcher $proxyFetcher, MovieFactory $movieFactory)
+	public function __construct(MovieFactory $movieFactory, HttpFetcher $httpFetcher)
 	{
-		$this->proxyFetcher  = $proxyFetcher;
 		$this->movieFactory = $movieFactory;
+		$this->httpFetcher  = $httpFetcher;
 	}
+
 
 	/**
 	 * @param Request          $request
@@ -57,7 +58,7 @@ class MovieCollectionArgumentResolver implements ArgumentValueResolverInterface
 	 */
 	public function resolve(Request $request, ArgumentMetadata $argument)
 	{
-		$results    = json_decode($this->proxyFetcher->fetch())->results;
+		$results    = json_decode($this->httpFetcher->fetch())->results;
 		$collection = [];
 		foreach ($results as $result) {
 			$collection[] = $this->movieFactory->create($result);

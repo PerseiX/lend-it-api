@@ -79,11 +79,11 @@
         "incenteev-parameters": {
             "file": "app/config/parameters.yml",
             "env-map": {
-                "database_host": "ec2-174-129-15-251.compute-1.amazonaws.com",
-                "database_port": "5432",
-                "database_name": "dbv8duj6r3t8k1",
-                "database_user": "fzwlpbobrdgcnl",
-                "database_password": "6eb5171b11a662e6ec9cefe337dd8cf979363b9e170732c14cf6dc163d93a2c5"
+                "database_host": "DATABASE_HOST",
+                "database_port": "DATABASE_PORT",
+                "database_name": "DATABASE_NAME",
+                "database_user": "DATABASE_USER",
+                "database_password": "DATABASE_PASSWORD"
             }
         },
         "branch-alias": null

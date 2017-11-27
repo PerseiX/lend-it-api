@@ -18,22 +18,24 @@
     },
     "require": {
         "php": ">=7.0",
+        "ext-pdo": "^7.1",
+        "composer/composer": "^1.5",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-migrations-bundle": "^1.0",
         "doctrine/orm": "^2.5",
+        "friendsofsymfony/user-bundle": "~2.0",
         "guzzlehttp/guzzle": "^6.3",
         "incenteev/composer-parameter-handler": "^2.0",
         "persei/persei-api": "1.0.*",
         "predis/predis": "^1.1",
         "sensio/distribution-bundle": "^5.0.19",
         "sensio/framework-extra-bundle": "^3.0.2",
+        "sensio/generator-bundle": "^3.0",
         "symfony/monolog-bundle": "^3.1.0",
         "symfony/polyfill-apcu": "^1.0",
         "symfony/swiftmailer-bundle": "^2.3.10",
         "symfony/symfony": "3.3.*",
-        "twig/twig": "^1.0||^2.0",
-        "friendsofsymfony/user-bundle": "~2.0",
-        "sensio/generator-bundle": "^3.0"
+        "twig/twig": "^1.0||^2.0"
     },
     "repositories": [
         {
@@ -54,6 +56,9 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ],
+        "pre-install-cmd":[
+          "PerseiX\\ProjectBundle\\Command\\HerokuDatabase::populateEnvironment"
+        ],
         "post-install-cmd": [
             "@symfony-scripts"
         ],
@@ -72,7 +77,14 @@
         "symfony-tests-dir": "tests",
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
+            "file": "app/config/parameters.yml",
+            "env-map": {
+                "database_host": "ec2-174-129-15-251.compute-1.amazonaws.com",
+                "database_port": "5432",
+                "database_name": "dbv8duj6r3t8k1",
+                "database_user": "fzwlpbobrdgcnl",
+                "database_password": "6eb5171b11a662e6ec9cefe337dd8cf979363b9e170732c14cf6dc163d93a2c5"
+            }
         },
         "branch-alias": null
     }

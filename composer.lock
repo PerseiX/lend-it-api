@@ -2692,16 +2692,16 @@
         },
         {
             "name": "persei/persei-api",
-            "version": "v1.0.3",
+            "version": "v1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PerseiX/persei-api.git",
-                "reference": "d22cc14d6fc3ce01821c647459fa5ee547b91348"
+                "reference": "d1c605a128962d07731c901a60aa88fa80675332"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PerseiX/persei-api/zipball/d22cc14d6fc3ce01821c647459fa5ee547b91348",
-                "reference": "d22cc14d6fc3ce01821c647459fa5ee547b91348",
+                "url": "https://api.github.com/repos/PerseiX/persei-api/zipball/d1c605a128962d07731c901a60aa88fa80675332",
+                "reference": "d1c605a128962d07731c901a60aa88fa80675332",
                 "shasum": ""
             },
             "require": {
@@ -2730,10 +2730,10 @@
                 "proprietary"
             ],
             "support": {
-                "source": "https://github.com/PerseiX/persei-api/tree/v1.0.3",
+                "source": "https://github.com/PerseiX/persei-api/tree/v1.0.4",
                 "issues": "https://github.com/PerseiX/persei-api/issues"
             },
-            "time": "2017-10-02T10:23:01+00:00"
+            "time": "2017-11-27T22:09:02+00:00"
         },
         {
             "name": "phar-io/manifest",

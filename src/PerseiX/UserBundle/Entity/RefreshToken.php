@@ -19,7 +19,7 @@ class RefreshToken extends BaseRefreshToken
 	protected $id;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="Client", inversedBy="user")
+	 * @ORM\ManyToOne(targetEntity="PerseiX\UserBundle\Entity\Client", inversedBy="user")
 	 * @ORM\JoinColumn(nullable=false)
 	 */
 	protected $client;

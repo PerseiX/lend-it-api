@@ -7,6 +7,7 @@ parameters:
     database_name: d34ieccnmv5mb7
     database_user: yifhrielgxidml
     database_password: 9a983fe16519608790695de714dfd607f3c127648a209197caeefdb673035d0f
+    database_url: postgres://yifhrielgxidml:9a983fe16519608790695de714dfd607f3c127648a209197caeefdb673035d0f@ec2-107-22-162-82.compute-1.amazonaws.com:5432/d34ieccnmv5mb7
     # You should uncomment this if you want to use pdo_sqlite
     #database_path: '%kernel.project_dir%/var/data/data.sqlite'
 

@@ -24,6 +24,11 @@ class Client extends BaseClient
 	protected $user;
 
 	/**
+	 * @ORM\ManyToOne(targetEntity="PerseiX\UserBundle\Entity\AuthCode", inversedBy="client")
+	 */
+	protected $authCode;
+
+	/**
 	 * Client constructor.
 	 */
 	public function __construct()

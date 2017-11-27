@@ -32,6 +32,7 @@ class User extends BaseUser
 	 * @ORM\OneToMany(targetEntity="PerseiX\UserBundle\Entity\AccessToken", mappedBy="user")
 	 */
 	protected $accessToken;
+
 	/**
 	 * User constructor.
 	 */

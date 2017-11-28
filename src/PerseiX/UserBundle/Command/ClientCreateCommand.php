@@ -36,9 +36,9 @@ class ClientCreateCommand extends ContainerAwareCommand
 	 */
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
-		$redirectUris     = $input->getArgument('redirectUris');
 		$allowedGrantType = $input->getArgument('allowedGrantType');
 		$clientName       = $input->getArgument('clientName');
+		$redirectUris     = $input->getArgument('redirectUris');
 
 		$clientManager = $this->getContainer()->get(self::CLIENT_MANAGER);
 		$client        = $clientManager->createClient();

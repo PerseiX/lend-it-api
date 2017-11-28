@@ -48,9 +48,6 @@ class PerseixUserController extends AbstractApiController
 	 */
 	public function registryAction(Request $request)
 	{
-		$data = $this->getDoctrine()->getRepository('PerseiXUserBundle:UserModel')->findAll();
-		print_r($data);
-//		die;
 		$form = $this->createForm(RegistryType::class);
 		$form->handleRequest($request);
 

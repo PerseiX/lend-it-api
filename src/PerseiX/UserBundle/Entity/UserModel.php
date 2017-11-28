@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table()
  */
-class User extends BaseUser
+class UserModel extends BaseUser
 {
 	/**
 	 * @ORM\Id

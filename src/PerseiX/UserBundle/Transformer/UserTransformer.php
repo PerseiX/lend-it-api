@@ -4,7 +4,7 @@ namespace PerseiX\UserBundle\Transformer;
 
 use ApiBundle\Representation\RepresentationInterface;
 use ApiBundle\Transformer\AbstractTransformer;
-use PerseiX\UserBundle\Entity\User;
+use PerseiX\UserBundle\Entity\UserModel;
 use PerseiX\UserBundle\Representation\UserRepresentation;
 
 /**
@@ -21,7 +21,7 @@ class UserTransformer extends AbstractTransformer
 	 */
 	public function support($input): bool
 	{
-		return $input instanceof User;
+		return $input instanceof UserModel;
 	}
 
 	/**
@@ -33,7 +33,7 @@ class UserTransformer extends AbstractTransformer
 	{
 		$representation = new UserRepresentation();
 
-		/** @var User $input */
+		/** @var UserModel $input */
 		$representation
 			->setId($input->getId())
 			->setEmail($input->getEmail())

@@ -2,13 +2,11 @@
 
 namespace PerseiX\UserBundle\Validator\Constraints;
 
-use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ORM\EntityManager;
-use FOS\UserBundle\Doctrine\UserManager;
-use PerseiX\UserBundle\Exception\ClassNotExist;
 use PerseiX\UserBundle\Exception\PropertyNotFoundException;
-use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use PerseiX\UserBundle\Exception\ClassNotExist;
+use Symfony\Component\Validator\Constraint;
+use Doctrine\ORM\EntityManager;
 
 /**
  * Class UniqueFieldValidator

@@ -3,7 +3,7 @@
 namespace PerseiX\UserBundle\Service;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use PerseiX\UserBundle\Entity\User;
+use PerseiX\UserBundle\Entity\UserModel;
 use PerseiX\UserBundle\Factory\UserFactory;
 use PerseiX\UserBundle\Model\RegistryModel;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;

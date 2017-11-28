@@ -2,7 +2,7 @@
 
 namespace PerseiX\UserBundle\Factory;
 
-use PerseiX\UserBundle\Entity\User;
+use PerseiX\UserBundle\Entity\UserModel;
 
 /**
  * Class UserFactory
@@ -11,10 +11,10 @@ use PerseiX\UserBundle\Entity\User;
 class UserFactory
 {
 	/**
-	 * @return User
+	 * @return UserModel
 	 */
 	public static function createUser()
 	{
-		return new User();
+		return new UserModel();
 	}
 }

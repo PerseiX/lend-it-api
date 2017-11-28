@@ -25,7 +25,7 @@ class AuthCode extends BaseAuthCode
 	protected $client;
 
 	/**
-	 * @ORM\ManyToOne(targetEntity="PerseiX\UserBundle\Entity\User", inversedBy="authCode")
+	 * @ORM\ManyToOne(targetEntity="PerseiX\UserBundle\Entity\UserModel", inversedBy="authCode")
 	 */
 	protected $user;
 }

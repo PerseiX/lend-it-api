@@ -26,24 +26,33 @@ class MovieRepresentation implements RepresentationInterface
 	private $description;
 
 	/**
-	 * @var array
-	 */
-	private $genreIds;
-
-	/**
 	 * @var \DateTime
 	 */
-	private $releaseAt;
-
-	/**
-	 * @var string
-	 */
-	private $language;
+	private $releasedAt;
 
 	/**
 	 * @var string
 	 */
 	private $imagePath;
+
+	/**
+	 * @var array[int]
+	 */
+	private $categoriesIds;
+
+	/**
+	 * @var array[CategoryRepository]
+	 */
+	private $categories;
+
+	/**
+	 * Movie2Representation constructor.
+	 */
+	public function __construct()
+	{
+		$this->categories    = [];
+		$this->categoriesIds = [];
+	}
 
 	/**
 	 * @return int
@@ -106,61 +115,21 @@ class MovieRepresentation implements RepresentationInterface
 	}
 
 	/**
-	 * @return array
-	 */
-	public function getGenreIds(): ?array
-	{
-		return $this->genreIds;
-	}
-
-	/**
-	 * @param array|null $genreIds
-	 *
-	 * @return MovieRepresentation
-	 */
-	public function setGenreIds(array $genreIds = null): MovieRepresentation
-	{
-		$this->genreIds = $genreIds;
-
-		return $this;
-	}
-
-	/**
 	 * @return \DateTime
 	 */
-	public function getReleaseAt(): \DateTime
+	public function getReleasedAt(): ?\DateTime
 	{
-		return $this->releaseAt;
+		return $this->releasedAt;
 	}
 
 	/**
-	 * @param \DateTime|null $releaseAt
+	 * @param \DateTime|null $releasedAt
 	 *
 	 * @return MovieRepresentation
 	 */
-	public function setReleaseAt(\DateTime $releaseAt = null): MovieRepresentation
+	public function setReleasedAt(\DateTime $releasedAt = null): MovieRepresentation
 	{
-		$this->releaseAt = $releaseAt;
-
-		return $this;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getLanguage(): string
-	{
-		return $this->language;
-	}
-
-	/**
-	 * @param string|null $language
-	 *
-	 * @return MovieRepresentation
-	 */
-	public function setLanguage(string $language = null): MovieRepresentation
-	{
-		$this->language = $language;
+		$this->releasedAt = $releasedAt;
 
 		return $this;
 	}
@@ -181,6 +150,46 @@ class MovieRepresentation implements RepresentationInterface
 	public function setImagePath(string $imagePath = null): MovieRepresentation
 	{
 		$this->imagePath = $imagePath;
+
+		return $this;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getCategoriesIds(): array
+	{
+		return $this->categoriesIds;
+	}
+
+	/**
+	 * @param int|null $categoryId
+	 *
+	 * @return MovieRepresentation
+	 */
+	public function setCategoriesId(int $categoryId = null): MovieRepresentation
+	{
+		$this->categoriesIds[] = $categoryId;
+
+		return $this;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getCategories(): array
+	{
+		return $this->categories;
+	}
+
+	/**
+	 * @param CategoryRepresentation|null $categoryRepresentation
+	 *
+	 * @return MovieRepresentation
+	 */
+	public function setCategories(CategoryRepresentation $categoryRepresentation = null): MovieRepresentation
+	{
+		$this->categories[] = $categoryRepresentation;
 
 		return $this;
 	}

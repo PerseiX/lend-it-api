@@ -4,6 +4,5 @@ persei_x_project:
     defaults:
         _format: json
 
-
 persei_x_user:
     resource: "@PerseiXUserBundle/Resources/routing/routing.yml"

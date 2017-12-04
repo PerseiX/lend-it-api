@@ -9,3 +9,20 @@ services:
         parent: 'abstract.transformer'
         tags:
             - { name: api.transformer }
+
+    perseix_transformer.category_transformer:
+        class: PerseiX\ProjectBundle\Transformer\CategoryTransformer
+        tags:
+            - { name: api.transformer }
+
+    preseix_transformer_collection.category_collection_transformer:
+        class: PerseiX\ProjectBundle\Transformer\Collection\CategoryCollectionTransformer
+        parent: 'abstract.transformer'
+        tags:
+            - { name: api.transformer }
+
+    preseix_transformer_scope_category.movie_scope:
+        class: PerseiX\ProjectBundle\Transformer\Scope\Category\MovieScope
+        parent: 'api.abstract_transformer_scope'
+        tags:
+            - { name: api.transformer_scope }

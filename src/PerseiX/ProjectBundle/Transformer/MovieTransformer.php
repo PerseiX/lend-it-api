@@ -4,7 +4,8 @@ namespace PerseiX\ProjectBundle\Transformer;
 
 use ApiBundle\Representation\RepresentationInterface;
 use ApiBundle\Transformer\AbstractTransformer;
-use PerseiX\ProjectBundle\Model\Movie;
+use PerseiX\ProjectBundle\Entity\Category;
+use PerseiX\ProjectBundle\Entity\Movie;
 use PerseiX\ProjectBundle\Representation\MovieRepresentation;
 
 /**
@@ -36,11 +37,14 @@ class MovieTransformer extends AbstractTransformer
 		/** @var Movie $input */
 		$representation->setId($input->getId())
 		               ->setDescription($input->getDescription())
-		               ->setGenreIds($input->getGenreIds())
 		               ->setImagePath($input->getImagePath())
-		               ->setLanguage($input->getLanguage())
-		               ->setReleaseAt($input->getReleaseAt())
+		               ->setReleasedAt($input->getReleasedAt())
 		               ->setTitle($input->getTitle());
+
+		/** @var Category $category */
+		foreach ($input->getCategories() as $category) {
+			$representation->setCategoriesId($category->getId());
+		}
 
 		return $representation;
 	}

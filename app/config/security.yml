@@ -11,26 +11,16 @@ security:
             pattern:    ^/oauth/v2/token
             security:   false
 
-        api_doc:
-            pattern:    ^/api-heroku/doc
-            anonymous: true
-
-        registry:
-            pattern:    ^/api/registry
-            anonymous: true
-
-        movies:
-            pattern:    ^/api/movies
+        api:
+            pattern: ^/api/*
             anonymous: true
 
         api:
-            pattern:    ^/api
+            pattern:    ^/api/me
             fos_oauth:  true
             stateless:  true
             provider:   fos_userbundle
 
     access_control:
-        - { path: ^/api-heroku/doc, roles: [ IS_AUTHENTICATED_ANONYMOUSLY ] }
-        - { path: ^/api/registry, roles: [ IS_AUTHENTICATED_ANONYMOUSLY ] }
-        - { path: ^/api/movies, roles: [ IS_AUTHENTICATED_ANONYMOUSLY ] }
-        - { path: ^/api, roles: [ ROLE_ADMIN ] }
+        - { path: ^/api/me, roles: [ ROLE_ADMIN ] }
+        - { path: ^/api/*, roles: [ IS_AUTHENTICATED_ANONYMOUSLY ] }

@@ -1,0 +1,17 @@
+PerseiX\ProjectBundle\Representation\CategoryRepresentation:
+    exclusion_policy: ALL
+    properties:
+        id:
+            type: integer
+            accessor:
+                getter: getId
+
+        active:
+            type: boolean
+            accessor:
+                getter: isActive
+
+        name:
+            type: string
+            accessor:
+                getter: getName

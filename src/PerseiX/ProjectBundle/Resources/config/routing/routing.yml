@@ -15,3 +15,11 @@ perseix_project_single_movie:
         _format: json
     requirements:
         movieId: \d+
+
+perseix_project_category_collection:
+    path: /categories
+    methods:
+        - GET
+    defaults:
+        _controller: PerseiXProjectBundle:Category:collection
+        _format: json

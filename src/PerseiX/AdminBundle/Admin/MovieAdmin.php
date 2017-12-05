@@ -46,7 +46,7 @@ class MovieAdmin extends AbstractAdmin
 	{
 		$listMapper
 			->addIdentifier('title')
-			->add('releasedAt')
+			->add('categories')
 			->add('active', null, [
 				'editable' => true
 			])

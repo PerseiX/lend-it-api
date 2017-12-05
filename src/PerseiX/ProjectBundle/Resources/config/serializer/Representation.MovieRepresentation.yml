@@ -49,3 +49,4 @@ PerseiX\ProjectBundle\Representation\MovieRepresentation:
                     movieId: expr(object.getId())
                 generator: default
                 absolute: true
+

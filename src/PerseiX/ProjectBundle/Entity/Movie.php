@@ -47,6 +47,13 @@ class Movie
 	private $imagePath;
 
 	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="string", length=16, nullable=true)
+	 */
+	private $language;
+
+	/**
 	 * @var ArrayCollection[Category]|null
 	 *
 	 * @ORM\ManyToMany(targetEntity="PerseiX\ProjectBundle\Entity\Category", mappedBy="movies")
@@ -138,6 +145,26 @@ class Movie
 	public function setImagePath(string $imagePath): Movie
 	{
 		$this->imagePath = $imagePath;
+
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getLanguage(): string
+	{
+		return $this->language;
+	}
+
+	/**
+	 * @param string $language
+	 *
+	 * @return Movie
+	 */
+	public function setLanguage(string $language): Movie
+	{
+		$this->language = $language;
 
 		return $this;
 	}

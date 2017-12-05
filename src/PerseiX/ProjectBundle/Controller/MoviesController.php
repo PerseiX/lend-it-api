@@ -30,7 +30,7 @@ class MoviesController extends AbstractApiController
 	 */
 	public function collectionAction()
 	{
-		$movies           = $this->getDoctrine()->getRepository('PerseiXProjectBundle:Movie')->findAll();
+		$movies          = $this->getDoctrine()->getRepository('PerseiXProjectBundle:Movie')->findAll();
 		$movieCollection = new MovieCollection($movies);
 
 		return $this->representationResponse($this->transform($movieCollection));
@@ -54,7 +54,6 @@ class MoviesController extends AbstractApiController
 	 */
 	public function singleAction(Movie $movie)
 	{
-
 		return $this->representationResponse($this->transform($movie));
 	}
 }

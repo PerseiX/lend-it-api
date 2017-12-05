@@ -2,10 +2,10 @@
 
 namespace PerseiX\ProjectBundle\Controller;
 
-use ApiBundle\Controller\AbstractApiController;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use PerseiX\ProjectBundle\Model\CategoryCollection;
+use ApiBundle\Controller\AbstractApiController;
 use Symfony\Component\HttpFoundation\Response;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 /**
  * Class CategoryController

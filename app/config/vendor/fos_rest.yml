@@ -3,7 +3,7 @@ fos_rest:
         enabled: true
     routing_loader:
         default_format: json
-        include_format: true
+        include_format: false
     serializer:
         serialize_null: true
     body_converter:

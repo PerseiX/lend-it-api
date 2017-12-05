@@ -42,9 +42,9 @@ class Category
 	}
 
 	/**
-	 * @return string
+	 * @return null|string
 	 */
-	public function getName(): string
+	public function getName(): ?string
 	{
 		return $this->name;
 	}
@@ -98,4 +98,13 @@ class Category
 
 		return $this;
 	}
+
+	/**
+	 * @return string
+	 */
+	public function __toString()
+	{
+		return (string)$this->getName();
+	}
+
 }

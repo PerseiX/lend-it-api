@@ -1,0 +1,12 @@
+services:
+    persix_admin_form_type.upload_file_type:
+        class: PerseiX\AdminBundle\Form\Type\UploadFileType
+        arguments:
+            - '%kernel.root_dir%'
+        tags:
+            - { name: 'form.type' }
+
+    perseix_admin_resolver.image_path_resolver:
+        class: PerseiX\AdminBundle\Resolver\ImagePathResolver
+        arguments:
+            - '@request_stack'

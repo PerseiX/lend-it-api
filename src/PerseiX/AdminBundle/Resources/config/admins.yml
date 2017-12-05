@@ -1,0 +1,18 @@
+services:
+    perseix_admin_admin.category_admin:
+        class: PerseiX\AdminBundle\Admin\CategoryAdmin
+        arguments:
+            - ~
+            - PerseiX\ProjectBundle\Entity\Category
+            - ~
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Category }
+
+    perseix_admin_admin.movie_admin:
+        class: PerseiX\AdminBundle\Admin\MovieAdmin
+        arguments:
+            - ~
+            - PerseiX\ProjectBundle\Entity\Movie
+            - ~
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Movie }

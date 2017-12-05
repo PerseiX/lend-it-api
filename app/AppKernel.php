@@ -25,8 +25,17 @@ class AppKernel extends Kernel
 			new FOS\UserBundle\FOSUserBundle(),
 			new FOS\RestBundle\FOSRestBundle(),
 			new ApiBundle\ApiBundle(),
-//			new Snc\RedisBundle\SncRedisBundle()
-		];
+			//			new Snc\RedisBundle\SncRedisBundle(),
+            new PerseiX\AdminBundle\PerseiXAdminBundle(),
+        ];
+
+		$bundles = array_merge($bundles, [
+			new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
+			new Sonata\BlockBundle\SonataBlockBundle(),
+			new Sonata\AdminBundle\SonataAdminBundle(),
+			new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+			new Sonata\CoreBundle\SonataCoreBundle(),
+		]);
 
 		if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
 			$bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();

@@ -3,6 +3,8 @@ services:
         class: PerseiX\ProjectBundle\Transformer\MovieTransformer
         tags:
             - { name: api.transformer }
+        calls:
+            - ['setImagePathResolver', ['@perseix_admin_resolver.image_path_resolver']]
 
     preseix_transformer_collection.movie_collection_transformer:
         class: PerseiX\ProjectBundle\Transformer\Collection\MovieCollectionTransformer

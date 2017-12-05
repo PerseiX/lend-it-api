@@ -48,6 +48,7 @@ class Movie
 
 	/**
 	 * @var ArrayCollection[Category]|null
+	 *
 	 * @ORM\ManyToMany(targetEntity="PerseiX\ProjectBundle\Entity\Category", mappedBy="movies")
 	 * @ORM\JoinColumn(referencedColumnName="id")
 	 */
@@ -55,18 +56,16 @@ class Movie
 
 	/**
 	 * Movie constructor.
-	 *
-	 * @param string $title
 	 */
 	public function __construct()
 	{
-		$this->ca = $title;
+		$this->categories = new ArrayCollection();
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getTitle(): string
+	public function getTitle(): ?string
 	{
 		return $this->title;
 	}
@@ -144,7 +143,7 @@ class Movie
 	}
 
 	/**
-	 * @return ArrayCollection|null
+	 * @return ArrayCollection
 	 */
 	public function getCategories()
 	{

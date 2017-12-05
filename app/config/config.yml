@@ -8,6 +8,7 @@ imports:
     - { resource: vendor/fos_rest.yml }
     - { resource: vendor/hateos.yml }
     - { resource: vendor/doctrine_migrations.yml }
+    - { resource: vendor/sonata/sonata.yml }
 #    - { resource: vendor/redis.yml }
 
 

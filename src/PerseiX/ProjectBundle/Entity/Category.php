@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @package PerseiX\ProjectBundle\Entity
  *
  * @ORM\Table()
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="PerseiX\ProjectBundle\Entity\Repository\CategoryRepository")
  */
 class Category
 {

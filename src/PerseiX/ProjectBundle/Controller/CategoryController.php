@@ -2,6 +2,7 @@
 
 namespace PerseiX\ProjectBundle\Controller;
 
+use ApiBundle\Request\PaginatedRequest;
 use PerseiX\ProjectBundle\Model\CategoryCollection;
 use ApiBundle\Controller\AbstractApiController;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +15,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 class CategoryController extends AbstractApiController
 {
 	/**
+	 * @param PaginatedRequest $paginatedRequest
 	 * @ApiDoc(
 	 *     section="Category",
 	 *     resource=true,
@@ -23,11 +25,10 @@ class CategoryController extends AbstractApiController
 	 *
 	 * @return Response
 	 */
-	public function collectionAction()
+	public function collectionAction(PaginatedRequest $paginatedRequest)
 	{
-		$collection      = $this->getDoctrine()->getRepository('PerseiXProjectBundle:Category')->findAll();
-		$collectionModel = new CategoryCollection($collection);
+		$collection = $this->getDoctrine()->getRepository('PerseiXProjectBundle:Category')->collectionQuery();
 
-		return $this->representationResponse($this->transform($collectionModel));
+		return $this->paginatedResponse(CategoryCollection::class, $collection, $paginatedRequest);
 	}
 }

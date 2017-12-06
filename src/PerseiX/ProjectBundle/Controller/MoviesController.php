@@ -4,6 +4,7 @@ namespace PerseiX\ProjectBundle\Controller;
 
 use ApiBundle\Annotation\Scope;
 use ApiBundle\Controller\AbstractApiController;
+use ApiBundle\Request\PaginatedRequest;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use PerseiX\ProjectBundle\Entity\Movie;
 use PerseiX\ProjectBundle\Model\MovieCollection;
@@ -18,6 +19,8 @@ use Symfony\Component\HttpFoundation\Response;
 class MoviesController extends AbstractApiController
 {
 	/**
+	 * @param PaginatedRequest $paginatedRequest
+	 *
 	 * @ApiDoc(
 	 *     section="Movies",
 	 *     resource=true,
@@ -28,12 +31,11 @@ class MoviesController extends AbstractApiController
 	 * @Scope(scope="category.movies", value="category.movies")
 	 * @return Response
 	 */
-	public function collectionAction()
+	public function collectionAction(PaginatedRequest $paginatedRequest)
 	{
-		$movies          = $this->getDoctrine()->getRepository('PerseiXProjectBundle:Movie')->findAll();
-		$movieCollection = new MovieCollection($movies);
+		$moviesQuery = $this->getDoctrine()->getRepository('PerseiXProjectBundle:Movie')->collectionQuery();
 
-		return $this->representationResponse($this->transform($movieCollection));
+		return $this->paginatedResponse(MovieCollection::class, $moviesQuery, $paginatedRequest);
 	}
 
 	/**

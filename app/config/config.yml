@@ -9,6 +9,7 @@ imports:
     - { resource: vendor/hateos.yml }
     - { resource: vendor/doctrine_migrations.yml }
     - { resource: vendor/sonata/sonata.yml }
+    - { resource: vendor/knp_pagination.yml }
 #    - { resource: vendor/redis.yml }
 
 

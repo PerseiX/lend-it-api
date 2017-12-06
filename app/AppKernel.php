@@ -15,19 +15,20 @@ class AppKernel extends Kernel
 			new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
 			new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
 			new Symfony\Bundle\SecurityBundle\SecurityBundle(),
+			new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
 			new Symfony\Bundle\MonologBundle\MonologBundle(),
 			new PerseiX\ProjectBundle\PerseiXProjectBundle(),
 			new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
 			new JMS\SerializerBundle\JMSSerializerBundle(),
 			new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
+			new PerseiX\AdminBundle\PerseiXAdminBundle(),
 			new Symfony\Bundle\TwigBundle\TwigBundle(),
 			new PerseiX\UserBundle\PerseiXUserBundle(),
 			new FOS\UserBundle\FOSUserBundle(),
 			new FOS\RestBundle\FOSRestBundle(),
 			new ApiBundle\ApiBundle(),
 			//			new Snc\RedisBundle\SncRedisBundle(),
-            new PerseiX\AdminBundle\PerseiXAdminBundle(),
-        ];
+		];
 
 		$bundles = array_merge($bundles, [
 			new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),

@@ -21,6 +21,16 @@ security:
             stateless:  true
             provider:   fos_userbundle
 
+        sonata_admin:
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                login_path: fos_user_security_login
+                check_path: fos_user_security_check
+            logout:       true
+            anonymous:    true
+
     access_control:
         - { path: ^/api/me, roles: [ ROLE_ADMIN ] }
         - { path: ^/api/*, roles: [ IS_AUTHENTICATED_ANONYMOUSLY ] }
+        - { path: ^/admin/*, roles: [ROLE_ADMIN] }

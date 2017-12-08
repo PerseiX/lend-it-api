@@ -14,3 +14,6 @@ fos_oauth_server_authorize:
 
 sonata_admin:
     resource: "vendor/sonata/routing.yml"
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

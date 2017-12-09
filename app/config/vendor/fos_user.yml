@@ -5,3 +5,5 @@ fos_user:
     from_email:
         address: you@example.com
         sender_name: PerseiX
+    group:
+        group_class: PerseiX\UserBundle\Entity\Group

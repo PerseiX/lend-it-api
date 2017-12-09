@@ -1,0 +1,49 @@
+.form-content {
+    /*width: 100%;*/
+    /*height: 100%;*/
+    margin: 0 auto;
+    max-width: 500px;
+    max-height: 600px;
+    background: linear-gradient(to bottom, #4d8083, #bab7c1);
+    color: white;
+    text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 15px ;
+}
+
+.form {
+    width: 400px;
+    padding-top: 40px;
+    border: 0;
+    margin: 0 auto;
+}
+
+input {
+    border: 0;
+    border-radius: 30px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    width: 300px;
+    height: 30px;
+    padding-left: 20px;
+}
+
+input[name="_submit"] {
+    padding: 0;
+    width: 150px;
+    margin-top: 60px;
+    background-color: #b5b6f9;
+    font-size: 18px;
+    text-align: center;
+}
+
+label {
+    font-size: 26px;
+}
+
+.error-message {
+    color: #590000;
+    font-size: 23px;
+}

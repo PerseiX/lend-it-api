@@ -34,19 +34,17 @@ class UserModel extends BaseUser
 	protected $accessToken;
 
 	/**
+	 * @ORM\ManyToMany(targetEntity="PerseiX\UserBundle\Entity\Group")
+	 * @ORM\JoinColumn(referencedColumnName="id")
+	 */
+	protected $groups;
+
+	/**
 	 * User constructor.
 	 */
 	public function __construct()
 	{
 		parent::__construct();
-	}
-
-	/**
-	 * {@inheritdoc}
-	 */
-	public function getRoles()
-	{
-		return ['ROLE_ADMIN'];
 	}
 
 	/**
@@ -56,4 +54,5 @@ class UserModel extends BaseUser
 	{
 		return $this->id;
 	}
+
 }

@@ -2,12 +2,13 @@
 
 namespace PerseiX\UserBundle\Service;
 
+use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use PerseiX\UserBundle\Entity\UserModel;
 use PerseiX\UserBundle\Factory\UserFactory;
 use PerseiX\UserBundle\Model\RegistryModel;
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
+use FOS\UserBundle\Model\UserInterface;
+use PerseiX\UserBundle\Entity\Group;
+use FOS\UserBundle\Model\User;
 
 /**
  * Class Registration
@@ -56,6 +57,8 @@ class Registration
 		     ->setSalt($salt)
 		     ->setEmail($registryModel->getEmail());
 
+		$this->populateGroups($user);
+
 		return $user;
 	}
 
@@ -65,5 +68,20 @@ class Registration
 	private function generateSalt(): string
 	{
 		return rtrim(str_replace('+', '.', base64_encode(random_bytes(32))), '=');
+	}
+
+	/**
+	 * @param User $user
+	 *
+	 * @return User
+	 */
+	private function populateGroups(User $user)
+	{
+		$customUserGroup = $this->em->getRepository('PerseiXUserBundle:Group')->findOneBy(['name' => Group::CUSTOM_USER]);
+		if (null != $customUserGroup) {
+			$user->addGroup($customUserGroup);
+		}
+
+		return $user;
 	}
 }

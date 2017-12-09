@@ -17,3 +17,8 @@ services:
             - '@doctrine.orm.entity_manager'
         tags:
             - { name: validator.constraint_validator }
+
+    perseix_user_povider.user_provider:
+        class: PerseiX\UserBundle\Provider\UserProvider
+        arguments:
+            - '@fos_user.user_manager.default'

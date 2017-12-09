@@ -1,0 +1,990 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.5.10
+-- Dumped by pg_dump version 9.5.10
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: access_token; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE access_token (
+    id integer NOT NULL,
+    client_id integer NOT NULL,
+    user_id integer,
+    token character varying(255) NOT NULL,
+    expires_at integer,
+    scope character varying(255) DEFAULT NULL::character varying
+);
+
+
+ALTER TABLE access_token OWNER TO postgres;
+
+--
+-- Name: access_token_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE access_token_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE access_token_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_code; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE auth_code (
+    id integer NOT NULL,
+    client_id integer NOT NULL,
+    user_id integer,
+    token character varying(255) NOT NULL,
+    redirect_uri text NOT NULL,
+    expires_at integer,
+    scope character varying(255) DEFAULT NULL::character varying
+);
+
+
+ALTER TABLE auth_code OWNER TO postgres;
+
+--
+-- Name: auth_code_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE auth_code_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE auth_code_id_seq OWNER TO postgres;
+
+--
+-- Name: category; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE category (
+    id integer NOT NULL,
+    name character varying(128) NOT NULL,
+    active boolean DEFAULT true
+);
+
+
+ALTER TABLE category OWNER TO postgres;
+
+--
+-- Name: category_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE category_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE category_id_seq OWNER TO postgres;
+
+--
+-- Name: category_movie; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE category_movie (
+    category_id integer NOT NULL,
+    movie_id integer NOT NULL
+);
+
+
+ALTER TABLE category_movie OWNER TO postgres;
+
+--
+-- Name: client; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE client (
+    id integer NOT NULL,
+    auth_code_id integer,
+    random_id character varying(255) NOT NULL,
+    redirect_uris text NOT NULL,
+    secret character varying(255) NOT NULL,
+    allowed_grant_types text NOT NULL,
+    name character varying(256) NOT NULL
+);
+
+
+ALTER TABLE client OWNER TO postgres;
+
+--
+-- Name: COLUMN client.redirect_uris; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN client.redirect_uris IS '(DC2Type:array)';
+
+
+--
+-- Name: COLUMN client.allowed_grant_types; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN client.allowed_grant_types IS '(DC2Type:array)';
+
+
+--
+-- Name: client_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE client_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE client_id_seq OWNER TO postgres;
+
+--
+-- Name: fos_group; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE fos_group (
+    id integer NOT NULL,
+    name character varying(180) NOT NULL,
+    roles text NOT NULL
+);
+
+
+ALTER TABLE fos_group OWNER TO postgres;
+
+--
+-- Name: COLUMN fos_group.roles; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN fos_group.roles IS '(DC2Type:array)';
+
+
+--
+-- Name: fos_group_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE fos_group_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE fos_group_id_seq OWNER TO postgres;
+
+--
+-- Name: migration_versions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE migration_versions (
+    version character varying(255) NOT NULL
+);
+
+
+ALTER TABLE migration_versions OWNER TO postgres;
+
+--
+-- Name: movie; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE movie (
+    id integer NOT NULL,
+    title character varying(256) NOT NULL,
+    description character varying(2048) DEFAULT NULL::character varying,
+    released_at timestamp(0) without time zone DEFAULT NULL::timestamp without time zone,
+    image_path character varying(128) DEFAULT NULL::character varying,
+    active boolean DEFAULT true,
+    language character varying(16) DEFAULT NULL::character varying
+);
+
+
+ALTER TABLE movie OWNER TO postgres;
+
+--
+-- Name: movie_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE movie_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE movie_id_seq OWNER TO postgres;
+
+--
+-- Name: refresh_token; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE refresh_token (
+    id integer NOT NULL,
+    client_id integer NOT NULL,
+    user_id integer,
+    token character varying(255) NOT NULL,
+    expires_at integer,
+    scope character varying(255) DEFAULT NULL::character varying
+);
+
+
+ALTER TABLE refresh_token OWNER TO postgres;
+
+--
+-- Name: refresh_token_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE refresh_token_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE refresh_token_id_seq OWNER TO postgres;
+
+--
+-- Name: user_model; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE user_model (
+    id integer NOT NULL,
+    username character varying(180) NOT NULL,
+    username_canonical character varying(180) NOT NULL,
+    email character varying(180) NOT NULL,
+    email_canonical character varying(180) NOT NULL,
+    enabled boolean NOT NULL,
+    salt character varying(255) DEFAULT NULL::character varying,
+    password character varying(255) NOT NULL,
+    last_login timestamp(0) without time zone DEFAULT NULL::timestamp without time zone,
+    confirmation_token character varying(180) DEFAULT NULL::character varying,
+    password_requested_at timestamp(0) without time zone DEFAULT NULL::timestamp without time zone,
+    roles text NOT NULL
+);
+
+
+ALTER TABLE user_model OWNER TO postgres;
+
+--
+-- Name: COLUMN user_model.roles; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN user_model.roles IS '(DC2Type:array)';
+
+
+--
+-- Name: user_model_group; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE user_model_group (
+    user_model_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE user_model_group OWNER TO postgres;
+
+--
+-- Name: user_model_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE user_model_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE user_model_id_seq OWNER TO postgres;
+
+--
+-- Data for Name: access_token; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY access_token (id, client_id, user_id, token, expires_at, scope) FROM stdin;
+1	1	2	MDQ5NGRmZDc5OTkxNzVkZDUwNzg4NjRjMTAwMmZkMWJmZjVhMWQzYjhiNzk3ZTM2YmRmY2M4NmUzMDA2YjYxYg	1512410572	\N
+2	1	2	ZmFjZjFmNmMwMWJlMGI1MDk5YjJjOGY3ZmVmOTc4ODIyZTkxOTY5ZjA5NzgwMzUzODRmZDIxMDliNjkxM2M3NA	1512411988	\N
+3	1	2	NjY3OWNhMWJlNGY2YTZhODUxYzBlMGIyMGI0ZjRjOGQ5N2Q1MWQzMDdiNzA5MzhlYzhkNjMwYmNlN2YzODBkNA	1512492689	\N
+\.
+
+
+--
+-- Name: access_token_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('access_token_id_seq', 3, true);
+
+
+--
+-- Data for Name: auth_code; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY auth_code (id, client_id, user_id, token, redirect_uri, expires_at, scope) FROM stdin;
+\.
+
+
+--
+-- Name: auth_code_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('auth_code_id_seq', 1, false);
+
+
+--
+-- Data for Name: category; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY category (id, name, active) FROM stdin;
+28	Akcja	t
+12	Przygodowy	t
+16	Animacja	t
+35	Komedia	t
+80	Kryminał	t
+99	Dokumentalny	t
+18	Dramat	t
+10751	Familijny	t
+14	Fantasy	t
+36	Historyczny	t
+27	Horror	t
+10402	Muzyczny	t
+9648	Tajemnica	t
+10749	Romans	t
+878	Sci-Fi	t
+10770	film TV	t
+53	Thriller	t
+10752	Wojenny	t
+37	Western	t
+\.
+
+
+--
+-- Name: category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('category_id_seq', 83, true);
+
+
+--
+-- Data for Name: category_movie; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY category_movie (category_id, movie_id) FROM stdin;
+18	46
+18	51
+18	52
+18	53
+18	55
+18	59
+18	63
+14	46
+14	47
+14	48
+14	56
+14	62
+14	64
+27	46
+27	49
+27	50
+27	59
+53	46
+53	49
+53	51
+53	59
+53	61
+53	65
+28	47
+28	48
+28	51
+28	57
+28	58
+28	60
+28	61
+28	63
+28	64
+28	65
+12	47
+12	48
+12	54
+12	57
+12	58
+12	60
+12	62
+12	64
+35	47
+35	53
+35	54
+35	57
+35	60
+35	63
+878	47
+878	48
+878	51
+878	52
+878	57
+878	58
+10752	52
+10751	54
+10751	56
+10751	60
+10751	62
+16	54
+16	60
+80	55
+80	63
+9648	55
+9648	63
+9648	65
+10749	56
+35	66
+35	69
+35	70
+35	71
+35	76
+35	82
+35	84
+16	66
+16	67
+12	66
+12	67
+12	70
+12	71
+12	76
+12	82
+12	85
+10751	67
+18	68
+18	69
+18	72
+18	73
+18	74
+18	77
+18	78
+18	79
+18	81
+18	83
+36	69
+36	72
+36	73
+28	70
+28	71
+28	75
+28	76
+28	82
+28	85
+14	71
+10752	73
+10752	77
+53	74
+53	80
+80	75
+878	76
+878	85
+10402	81
+\.
+
+
+--
+-- Data for Name: client; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY client (id, auth_code_id, random_id, redirect_uris, secret, allowed_grant_types, name) FROM stdin;
+1	\N	15cdcd5bbnxckw0kos04s4ccwcsk80c044kwsg0ksgog4s0c0g	a:1:{i:0;s:52:"http://localhost/lend-it-api/web/app_dev.php/api/doc";}	n2x28twxu0gowwgg0kcwoscccwscso4oww4ossoc0wc0wss8c	a:1:{i:0;s:8:"password";}	lend-it-api
+\.
+
+
+--
+-- Name: client_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('client_id_seq', 1, true);
+
+
+--
+-- Data for Name: fos_group; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY fos_group (id, name, roles) FROM stdin;
+1	SONATA_ADMIN	a:1:{i:0;s:17:"ROLE_SONATA_ADMIN";}
+2	CUSTOM_USER	a:1:{i:0;s:16:"ROLE_CUSTOM_USER";}
+\.
+
+
+--
+-- Name: fos_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('fos_group_id_seq', 2, true);
+
+
+--
+-- Data for Name: migration_versions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY migration_versions (version) FROM stdin;
+20171204162220
+20171205151131
+20171209092258
+20171209093118
+\.
+
+
+--
+-- Data for Name: movie; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY movie (id, title, description, released_at, image_path, active, language) FROM stdin;
+46	It	Kiedy w mieście Derry w stanie Maine zaczynają znikać dzieci, grupa dzieciaków musi stawić czoła swoim największym lękom. Na ich drodze staje nikczemny klaun o imieniu Pennywise, który zapisał się na kartach historii jako morderca lubujący się w zadawaniu bólu. Film oparty jest na motywach niezwykle popularnej powieści Stephena Kinga pod tym samym tytułem, która przeraża czytelników od dziesięcioleci.	2017-09-05 00:00:00	jDOMQ0fm9A97gy9aD9vF7MEKzJA.jpg	t	en
+47	Thor: Ragnarok	Thor zostaje uwięziony po drugiej stronie wszechświata. Osłabiony i pozbawiony młota musi znaleźć sposób, by powrócić do Asgardu i stawić czoła bezwzględnej i wszechpotężnej Heli oraz powstrzymać Ragnarok – "zmierzch bogów", zagładę świata i całej asgardzkiej cywilizacji. Przedtem jednak musi stanąć do gladiatorskiego pojedynku na śmierć i życie z byłym sprzymierzeńcem i członkiem drużyny Avengers — niesamowitym Hulkiem!  [opis dystrybutora kino]	2017-10-25 00:00:00	oSLd5GYGsiGgzDPKTwQh7wamO8t.jpg	t	en
+48	Justice League	Zainspirowany ofiarnym czynem Supermana Bruce Wayne odzyskał wiarę w ludzkość. Prosi swojego nowego sprzymierzeńca, Dianę Prince, o pomoc w pokonaniu jeszcze potężniejszego wroga. Nie tracąc czasu, Batman i Wonder Woman starają się znaleźć i przekonać do współpracy grupę metaludzi, która ma stanąć do walki z nowym zagrożeniem. Jednak mimo utworzenia jedynej w swoim rodzaju ligi superbohaterów, złożonej z Batmana, Wonder Woman, Aquamana, Cyborga i Flasha, może być już za późno na uratowanie planety przed atakiem katastroficznych rozmiarów.	2017-11-15 00:00:00	1sKgyz3XNPGycTjbDjo42mmkYj7.jpg	t	en
+49	Jigsaw	Miasto paraliżuje strach, gdy policja odkrywa kolejne zmasakrowane zwłoki. Media rozdmuchują teorię o seryjnym mordercy, ale detekty­wom nie udaje się ustalić żadnego wspólnego mianownika, który łączyłby wszystkie zabójstwa. Aż do dnia, gdy na jaw wyjdzie jeden ma­kabryczny szczegół, który rzuci podejrzenie na dobrze znanego policji mordercę Johna Kramera. Problem w tym, że Kramer nie żyje...	2017-10-20 00:00:00	uQnD9QnokQMPfkyZwXVkSmph9yh.jpg	t	en
+50	Happy Death Day	Studentka college’u (znana z „La La Land” Jessica Rothe) każdego dnia na nowo budzi się w dniu swojej śmierci, powoli odkrywając niezwykłe szczegóły przyczyn zabójstwa, by wreszcie odkryć tożsamość mordercy i jego motywy.	2017-10-12 00:00:00	nGsqGFmSUM1MLmtLHKmTsCts6Zr.jpg	t	en
+51	Sleight	Młody uliczny magik musis zająć się młodszą siostrą po odejściu matki; wplątuje się w handel narkotykami w Los Angeles, aby utrzymać dach nad głową.	2017-04-28 00:00:00	wridRvGxDqGldhzAIh3IcZhHT5F.jpg	t	en
+52	War for the Planet of the Apes	Cezar i jego małpy uwikłane zostają w zbrojny konflikt z armią ludzi, na czele której stoi bezwzględny Pułkownik. Małpy ponoszą straszliwe straty, podczas gdy Cezar zmaga się z mrocznymi instynktami i wyrusza w drogę, by pomścić swych pobratymców. Gdy Cezar i Pułkownik stają twarzą w twarz, dochodzi do spektakularnej bitwy, w której stawką jest przyszłość obu gatunków i całej naszej planety.	2017-07-11 00:00:00	pH3ZrjWOYXriBcwX4doUg5ILf9d.jpg	t	en
+53	Daddy's Home 2	Brad i Dusty muszą poradzić sobie ze swymi natrętnymi ojcami w czasie świąt Bożego Narodzenia.	2017-11-09 00:00:00	5dqpN0meHBGlKVPzUlwhJJswWLx.jpg	t	en
+54	Minions	Film zabierze nas w przeszłość, dzięki czemu poznamy historię Minionków - od zarania dziejów do czasu, gdy w ich życiu pojawił się Gru. Minionki zawsze potrzebowały złego przywódcy, służyły już T. Rexowi, Czyngis-chanowi, Napoleonowi, a nawet hrabiemu Drakuli, tyle tylko, że… wszystkich ich przypadkowo zgładziły. Teraz, kiedy nie mają komu służyć, są pogrążone w rozpaczy. Minionki Kevin, Bob i Stuart desperacko poszukując zła, przemierzają cały świat. Po drodze detronizują królową Elżbietę II i wplątują się w najdziwniejsze przygody. Na Florydzie, podczas tajemnej konwencji złoczyńców poznają Scarlett Overkill (w wersji oryginalnej głosu użyczyła jej Sandra Bullock), pierwszy w historii tak czarny kobiecy charakter. W niej cała nadzieja.	2015-06-17 00:00:00	q0R4crx2SehcEEQEkYObktdeFy.jpg	t	en
+55	Murder on the Orient Express	Genialny belgijski detektyw Herkules Poirot bada morderstwo amerykańskiego potentata na pokładzie pociągu Orient Express.	2017-11-03 00:00:00	mqPUxPvyYJD5srqi0YSGlUKBbdF.jpg	t	en
+56	Beauty and the Beast	Belle gotowa jest zamieszkać w zamku potwora, aby ratować ojca. Z czasem między dziewczyną a bestią zaczyna rodzić się uczucie.	2017-03-16 00:00:00	kAqgbFYKZfzJ0NtsWs6l1vh407j.jpg	t	en
+57	Spider-Man: Homecoming	Młody Peter Parker/Spider-Man, poszukuje swojego nowego ego superbohatera. Zafascynowany przygodą z Avengersami, wraca do domu, gdzie mieszka wraz z ciotką May. Cały czas pozostaje pod czujnym okiem swego mentora – Tony’ego Starka. Próbuje wrócić do normalnego życia, unikając myśli, że jest kimś więcej niż tylko "Spider-Manem z sąsiedztwa". Jednak kiedy pojawia się Vulture, nowy groźny wróg, wszystko, co dla Petera ważne, staje się zagrożone.	2017-07-05 00:00:00	2lY3hLaHnMhsOSZxOhefzyhcE7x.jpg	t	en
+58	Valerian and the City of a Thousand Planets	Valerian i Laurelina to kosmiczni agenci, odpowiedzialni za utrzymanie porządku na terytoriach zamieszkałych przez ludzi. Podczas misji w Mieście Tysiąca Planet – kulturowym i politycznym centrum galaktyki – przyjdzie im zmierzyć się ze złowrogą siłą, która zagraża bezpieczeństwu całego wszechświata.	2017-07-20 00:00:00	dmGc2jBbPqxTDC4eVo9Kt2neOYG.jpg	t	en
+59	The Killing of a Sacred Deer	Colin Farrell, Nicole Kidman i Alicia Silverstone we wciskającej w fotel opowieści o człowieku stojącym przed niewyobrażalnie trudnym wyborem. Bez względu na to, jaką decyzję podejmie, stanie się sprawcą tragedii we własnej rodzinie. A wszystko za sprawą nastoletniego chłopca, który dotąd był dla niego jak syn.	2017-10-20 00:00:00	zidpx5K0YgKgnSGu5pY9EDlldCD.jpg	t	en
+60	Big Hero 6	"Wielka Szóstka" to najnowsza komedia twórców "Krainy lodu", inspirowana komiksem Marvela o tym samym tytule.  Pełna humoru opowieść o niezwykłej przyjaźni pomiędzy młodym geniuszem Hiro a jego robotem o wielkiej posturze i wielkim sercu, Baymaxem. Wypadek podczas pokazów robotyki staje się początkiem serii wydarzeń zagrażających bezpieczeństwu całego miasta San Fransokyo. Pragnąc odkryć źródło zagrożenia i aby zapobiec zbliżającej się katastrofie, Hiro  wraz z przyjaciółmi - nieustaraszoną ryzykantką, neurotycznym miłośnikiem porządku, genialną chemiczką, zwariowanym fanem komiksów oraz nieco nadopiekuńczym Baymaxem - tworzy Wielką Szóstkę ultranowoczesnych bohaterów. Czy nowoczesne technologie i  przyjaźń wystarczą, by pokonać tajemniczego przeciwnika?	2014-10-24 00:00:00	51LPW1eP0NEVMhr1b7ChyEVAaBw.jpg	t	en
+61	John Wick	John Wick był najlepszym płatnym zabójcą w USA, ale dla ukochanej żony wycofał się z biznesu. Po jej śmierci nie dane mu będzie w spokoju przeżyć żałoby. Gdy syn rosyjskiego mafiosa odbierze mu ostatnią pamiątkę po ukochanej, zemsta będzie tylko kwestią czasu. Przestępczy świat na wieść o tym, że John Wick wrócił do gry, zamiera w przerażeniu, a rosyjski mafioso wydaje na niego wyrok śmierci. Już wkrótce miasto stanie w płomieniach...Były płatny morderca jest ścigany przez starego przyjaciela, który przyjął na niego zlecenie.	2014-10-22 00:00:00	5vHssUeVe25bMrof1HyaPyWgaP.jpg	t	en
+62	Jumanji	Kiedy młody Alan Parrish odkrył tajemniczą grę planszową, nie zdawał sobie sprawy z jej niewyobrażalnej mocy. Wszystko zmieniło się z chwilą, w której na oczach swojej koleżanki Sary został magicznie przeniesiony do dzikiej dżungli Jumanji! 26 lat później zostaje uwolniony z gry przez dwójkę niczego nie podejrzewających dzieciaków. Alan (Robin Williams) ponownie poznaje Sarah (Bonnie Hunt) i razem z Judy (Kirsten Dunst) oraz Peterem (Bradley Pierce), stara się przechytrzyć potężne moce gry w pomysłowej przygodzie, która łączy zapierające dech w piersiach efekty specjalne i zaczarowaną mozaikę komedii, magii i dreszczyku.	1995-12-15 00:00:00	8wBKXZNod4frLZjAKSDuAcQ2dEU.jpg	t	en
+63	Suburbicon	Tajemnica kryminalna osadzona w spokojnym rodzinnym mieście Suburbicon w latach pięćdziesiątych XX wieku, w którym najlepsze i najgorsze cechy ludzkości ukazywane są w prześmiewczy sposób, przez uczynki pozornie zwykłych ludzi. Kiedy napad na dom przynosi śmiertelną ofiarę, obraz idealnej rodziny zamienia się w szantaż, zemstę i morderstwo.	2017-10-26 00:00:00	a3IHgSwO5jWPLcGjKqbQ7pxVGkq.jpg	t	en
+64	Wonder Woman	Zanim stała się Wonder Woman, była Dianą, księżniczką Amazonek wyszkoloną na niepokonaną wojowniczkę. Wychowała się na odległej, rajskiej wyspie. Pewnego dnia rozbił się tam amerykański pilot, który opowiedział Dianie o wielkim konflikcie ogarniającym świat. Księżniczka porzuciła więc swój dom przekonana, że może powstrzymać zagrożenie. W walce u boku ludzi, w wojnie ostatecznej, Diana odkrywa pełnię swojej mocy... i swoje prawdziwe przeznaczenie.  [opis dystrybutora kino]	2017-05-30 00:00:00	imekS7f1OuHyUP2LAiTEM0zBzUz.jpg	t	en
+65	Atomic Blonde	Berlin, czasy Zimnej Wojny. Brytyjska agentka zostaje przerzucona do komunistycznego Berlina w celu odnalezienia zabójców swojego partnera i odzyskania listy podwójnych agentów.	2017-07-26 00:00:00	kV9R5h0Yct1kR8Hf8sJ1nX0Vz4x.jpg	t	en
+66	The Star		2017-11-15 00:00:00	tEbDvivUfsCupngKIfMJJ725eAD.jpg	t	en
+67	Coco	Film opowiada o historii małego chłopca - Miguela, który próbuje rozwiązać pewną tajemnicę rodzinną. Za sprawą nieoczekiwanych wydarzeń dochodzi do spotkania chłopca i rodziny, żywej jak i martwej.	2017-10-27 00:00:00	eKi8dIrr8voobbaGzDpe8w0PVbC.jpg	t	en
+68	Roman J. Israel, Esq.		2017-11-10 00:00:00	8e5IGlLrVjwrlDcRtzSQkXhJFWl.jpg	t	en
+69	The Disaster Artist		2017-12-01 00:00:00	uCH6FOFsDW6pfvbbmIIswuvuNtM.jpg	t	en
+70	Kingsman: The Golden Circle	Kontynuacja przeboju "Kingsman: Tajne służby", który zrewolucjonizował kino szpiegowskie i wprowadził na ekran agentów nowej generacji. Tym razem nasi bohaterowie stają w obliczu wyjątkowego wyzwania. Gdy ich kwatera zostaje zniszczona, a los świata zawisa na włosku, brytyjscy agenci odkrywają, że w Stanach Zjednoczonych istnieje sprzymierzona organizacja szpiegowska o równie długiej i bogatej historii. Przedstawiciele dwóch elitarnych organizacji muszą teraz zapomnieć o dzielących ich różnicach i wspólnie stawić czoło nieobliczalnemu wrogowi, który dąży do władzy nad światem. Gra idzie o wyjątkowo wysoką stawkę, ale dla Eggsy'ego nie ma nic trudnego...	2017-09-20 00:00:00	yym9WGPJzMtBKQAXj4b5a1SsRuo.jpg	t	en
+71	Pirates of the Caribbean: Dead Men Tell No Tales	Nikczemny kapitan Salazar (Javier Bardem) wraz ze swoją załogą piratów-zjaw ucieka z Diabelskiego Trójkąta i poprzysięga zemstę na wszystkich piratach. Nieuniknionej zagładzie próbuje zapobiec Jack Sparrow (Johnny Depp). Dowódca "Czarnej Perły" wyrusza w podróż, by odnaleźć Trójząb Posejdona, mistyczny artefakt dający władzę nad morzami, i użyć go w walce przeciwko Salazarowi.	2017-05-23 00:00:00	gm32KhemALUXCxz2XZTDka0X46k.jpg	t	en
+72	The Man Who Invented Christmas		2017-11-22 00:00:00	qRkzRue5rTzB6PESXBJCKqROOXC.jpg	t	en
+73	Darkest Hour		2017-11-22 00:00:00	67fPL6ZaiOeM4hYqpxqV9Py8psJ.jpg	t	en
+74	All I See Is You	Życie niewidomej kobiety zmienia się, kiedy odzyskuje wzrok i odkrywa niepokojące fakty o sobie oraz swoim małżeństwie.	2017-08-10 00:00:00	wc9MgFWuBl3VS72w6VtiZXTgN79.jpg	t	en
+75	Baby Driver	Utalentowanego młodego kierowcę, który zarabia na życie udziałem w napadach, przez życie prowadzi muzyka. To ona pomaga mu być najlepszym w tym, co robi. Kiedy poznaje dziewczynę swych marzeń, postanawia porzucić przestępczą przeszłość i zacząć żyć normalnie. Zmuszony przez bossa mafijnego, dla którego pracuje, do udziału w z góry skazanym na niepowodzenie skoku, ryzykuje utratą wszystkiego, co dla niego najważniejsze – miłości, wolności i muzyki.	2017-06-28 00:00:00	dN9LbVNNZFITwfaRjl4tmwGWkRg.jpg	t	en
+76	Guardians of the Galaxy Vol. 2	Grupa najbardziej niesubordynowanych outsiderów w galaktyce penetruje odległe zakątki kosmosu, próbując rozwikłać zagadkę pochodzenia jednego z jej członków - Petera Quilla aka Star Lorda. Niegdysiejsi wrogowie staną się ich sprzymierzeńcami, a w nieustannie powiększającym się filmowym uniwersum Marvela zagoszczą nowe postacie znane z kart komiksu.	2017-04-19 00:00:00	7khe9JAbybsnUtJuEYOsaNy5r0d.jpg	t	en
+77	Thank You for Your Service		2017-10-26 00:00:00	3AJfmBiEXVY7YmxRx2NSdbjuVDc.jpg	t	en
+78	Wonder Wheel		2017-12-01 00:00:00	fPXn8SW4pa4kJErAIAJLmb3Znns.jpg	t	en
+79	The Tribes of Palos Verdes		2017-12-01 00:00:00	8w4JecmVtqcSMk4mdiHURzISsYz.jpg	t	en
+80	Operation Avalanche		2016-07-29 00:00:00	fhASK3sWpe85FW44VMs7YBVaG5Z.jpg	t	en
+81	Love Beats Rhymes		2017-12-01 00:00:00	xOY5AFJhACTgJJeTQTvlyOYw2BS.jpg	t	en
+82	Deadpool	Wade Wilson - niegdyś agent służb specjalnych, a obecnie najemnik - poddany zostaje nielegalnemu eksperymentowi, w wyniku którego nabywa niezwykłych mocy samouzdrawiania. Odtąd staje się znany jako "Deadpool" i wyposażony w nowe zdolności oraz czarne poczucie humoru wyrusza z misją wymierzenia sprawiedliwości człowiekowi, który niemal zniszczył mu życie.	2016-02-09 00:00:00	inVq3FRqcYIRl2la8iZikYYxFNR.jpg	t	en
+83	Wonder		2017-11-16 00:00:00	ouYgAatYH4JzIThj6FI3UYf31RI.jpg	t	en
+84	Ted 2	Miś Ted podejmuje w swoim życiu poważną decyzję. Postanawia ożenić się z Tami Lynn (Jessica Barth) i mieć z nią dziecko. John (Mark Wahlberg), chcąc pomóc przyjacielowi, postanawia zostać dawcą nasienia. Jednak, aby nowożeńcy mieli prawo do opieki nad maluchem, miś musi udowodnić przed sądem, że jest istotą ludzką.	2015-06-25 00:00:00	A7HtCxFe7Ms8H7e7o2zawppbuDT.jpg	t	en
+85	Captain America: Civil War	W filmie "Kapitan Ameryka: wojna bohaterów", będącym bezpośrednią kontynuacją hitowego "Avengers: Czas Ultrona", Steve Rogers aka Kapitan Ameryka staje na czele drużyny Avengers, by ponownie ocalić ludzkość przed zagładą. W czasie kolejnej międzynarodowej akcji z udziałem superbohaterów ponownie dochodzi do strat w ludności cywilnej. Rosną więc naciski polityczne, by poddać herosów systemowi nadzoru i utworzyć organ decydujący o stopniu ich zaangażowania w działania militarne. Sytuacja ta poważnie wpływa na atmosferę panującą wśród Avengers, którzy starają się obronić świat przed nowym, nikczemnym nieprzyjacielem.	2016-04-27 00:00:00	h4DpeIu2IHjPv41ydnhm7JMlIFG.jpg	t	en
+\.
+
+
+--
+-- Name: movie_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('movie_id_seq', 85, true);
+
+
+--
+-- Data for Name: refresh_token; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY refresh_token (id, client_id, user_id, token, expires_at, scope) FROM stdin;
+1	1	2	OGNjOTRhYzE4OWU3OTM0ZDM5OTA1Y2ZlMjc0ZDc4NGU0N2JiNWFmYjljZmY1YzIwNmQ0YmRhMDUzYTIwM2E0NQ	1513616572	\N
+2	1	2	ZjQ4NTRhZWY5MDYzMGU3ZWE0OWEwNTYzYjc1NzU3OTliNmRmZmE5NTdkNTA2NDU0Nzg1MDI5MWJjMTYyMWEyNg	1513617988	\N
+3	1	2	OTYyZWM3NTdkZTgwYTJkN2VhMjYyNWI5YzczMjZjNzFjODY0OWRlYjYxYjQxMjE0NTBiNGI2MGE3OTZhNDhlNw	1513698689	\N
+\.
+
+
+--
+-- Name: refresh_token_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('refresh_token_id_seq', 3, true);
+
+
+--
+-- Data for Name: user_model; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY user_model (id, username, username_canonical, email, email_canonical, enabled, salt, password, last_login, confirmation_token, password_requested_at, roles) FROM stdin;
+1	janusz@gmail.com	janusz@gmail.com	janusz@gmail.com	janusz@gmail.com	t	exM6.2FAsXDGKhJkZPXZ3nEpFnIpwUVYYWRXMmEfV6A	NwuPW+E7PNyzyBkqPaaJjDLCdLG92QSzG1f5JJ3AtDd70D5LeBeQ3DHYfIAGT57ZzQWRWVylBAmYi2OQvUAkaA==	\N	\N	\N	a:0:{}
+2	dupa@gmail.com	dupa@gmail.com	dupa@gmail.com	dupa@gmail.com	t	vpOGOyECL0IYon.pcdepdXFmxIvCVk3GedL9whY1OHA	9r+z/imcpcmOi/oo2tuLMsxZ/SXWWJ+EWw/TPJs9lHSf2Eb6o+S/tciqMEWiqMG1TGaHRw/YKkeL4p4/B/dd6Q==	2017-12-09 10:42:43	\N	\N	a:0:{}
+3	admin	admin	admin@gmail.com	admin@gmail.com	t	i4jzpj4hK9ySSSe5VudrQjqIO2kkROuCU1KpZ4mp6y0	iONXdYjzX47PwxOjnpwEkwGNRLlno4zGTP4SWuh1MiBPes3eTDcVongtckfh3AI2v5oas4BTluhRiteMooKR4w==	2017-12-09 11:20:42	\N	\N	a:0:{}
+\.
+
+
+--
+-- Data for Name: user_model_group; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY user_model_group (user_model_id, group_id) FROM stdin;
+3	1
+2	2
+1	2
+\.
+
+
+--
+-- Name: user_model_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('user_model_id_seq', 4, true);
+
+
+--
+-- Name: access_token_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY access_token
+    ADD CONSTRAINT access_token_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_code_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_code
+    ADD CONSTRAINT auth_code_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: category_movie_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY category_movie
+    ADD CONSTRAINT category_movie_pkey PRIMARY KEY (category_id, movie_id);
+
+
+--
+-- Name: category_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY category
+    ADD CONSTRAINT category_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: client_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY client
+    ADD CONSTRAINT client_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: fos_group_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY fos_group
+    ADD CONSTRAINT fos_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: migration_versions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY migration_versions
+    ADD CONSTRAINT migration_versions_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: movie_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY movie
+    ADD CONSTRAINT movie_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: refresh_token_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY refresh_token
+    ADD CONSTRAINT refresh_token_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_model_group_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY user_model_group
+    ADD CONSTRAINT user_model_group_pkey PRIMARY KEY (user_model_id, group_id);
+
+
+--
+-- Name: user_model_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY user_model
+    ADD CONSTRAINT user_model_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: idx_5933d02c19eb6921; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX idx_5933d02c19eb6921 ON auth_code USING btree (client_id);
+
+
+--
+-- Name: idx_5933d02ca76ed395; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX idx_5933d02ca76ed395 ON auth_code USING btree (user_id);
+
+
+--
+-- Name: idx_b6a2dd6819eb6921; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX idx_b6a2dd6819eb6921 ON access_token USING btree (client_id);
+
+
+--
+-- Name: idx_b6a2dd68a76ed395; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX idx_b6a2dd68a76ed395 ON access_token USING btree (user_id);
+
+
+--
+-- Name: idx_c744045569fedee4; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX idx_c744045569fedee4 ON client USING btree (auth_code_id);
+
+
+--
+-- Name: idx_c74f219519eb6921; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX idx_c74f219519eb6921 ON refresh_token USING btree (client_id);
+
+
+--
+-- Name: idx_c74f2195a76ed395; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX idx_c74f2195a76ed395 ON refresh_token USING btree (user_id);
+
+
+--
+-- Name: idx_f56dbd2612469de2; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX idx_f56dbd2612469de2 ON category_movie USING btree (category_id);
+
+
+--
+-- Name: idx_f56dbd268f93b6fc; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX idx_f56dbd268f93b6fc ON category_movie USING btree (movie_id);
+
+
+--
+-- Name: idx_fa98ada799f853e7; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX idx_fa98ada799f853e7 ON user_model_group USING btree (user_model_id);
+
+
+--
+-- Name: idx_fa98ada7fe54d947; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX idx_fa98ada7fe54d947 ON user_model_group USING btree (group_id);
+
+
+--
+-- Name: uniq_3557898192fc23a8; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX uniq_3557898192fc23a8 ON user_model USING btree (username_canonical);
+
+
+--
+-- Name: uniq_35578981a0d96fbf; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX uniq_35578981a0d96fbf ON user_model USING btree (email_canonical);
+
+
+--
+-- Name: uniq_35578981c05fb297; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX uniq_35578981c05fb297 ON user_model USING btree (confirmation_token);
+
+
+--
+-- Name: uniq_4b019ddb5e237e06; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX uniq_4b019ddb5e237e06 ON fos_group USING btree (name);
+
+
+--
+-- Name: uniq_5933d02c5f37a13b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX uniq_5933d02c5f37a13b ON auth_code USING btree (token);
+
+
+--
+-- Name: uniq_b6a2dd685f37a13b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX uniq_b6a2dd685f37a13b ON access_token USING btree (token);
+
+
+--
+-- Name: uniq_c74f21955f37a13b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX uniq_c74f21955f37a13b ON refresh_token USING btree (token);
+
+
+--
+-- Name: fk_5933d02c19eb6921; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_code
+    ADD CONSTRAINT fk_5933d02c19eb6921 FOREIGN KEY (client_id) REFERENCES client(id);
+
+
+--
+-- Name: fk_5933d02ca76ed395; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_code
+    ADD CONSTRAINT fk_5933d02ca76ed395 FOREIGN KEY (user_id) REFERENCES user_model(id);
+
+
+--
+-- Name: fk_b6a2dd6819eb6921; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY access_token
+    ADD CONSTRAINT fk_b6a2dd6819eb6921 FOREIGN KEY (client_id) REFERENCES client(id);
+
+
+--
+-- Name: fk_b6a2dd68a76ed395; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY access_token
+    ADD CONSTRAINT fk_b6a2dd68a76ed395 FOREIGN KEY (user_id) REFERENCES user_model(id);
+
+
+--
+-- Name: fk_c744045569fedee4; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY client
+    ADD CONSTRAINT fk_c744045569fedee4 FOREIGN KEY (auth_code_id) REFERENCES auth_code(id);
+
+
+--
+-- Name: fk_c74f219519eb6921; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY refresh_token
+    ADD CONSTRAINT fk_c74f219519eb6921 FOREIGN KEY (client_id) REFERENCES client(id);
+
+
+--
+-- Name: fk_c74f2195a76ed395; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY refresh_token
+    ADD CONSTRAINT fk_c74f2195a76ed395 FOREIGN KEY (user_id) REFERENCES user_model(id);
+
+
+--
+-- Name: fk_f56dbd2612469de2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY category_movie
+    ADD CONSTRAINT fk_f56dbd2612469de2 FOREIGN KEY (category_id) REFERENCES category(id) ON DELETE CASCADE;
+
+
+--
+-- Name: fk_f56dbd268f93b6fc; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY category_movie
+    ADD CONSTRAINT fk_f56dbd268f93b6fc FOREIGN KEY (movie_id) REFERENCES movie(id) ON DELETE CASCADE;
+
+
+--
+-- Name: fk_fa98ada799f853e7; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY user_model_group
+    ADD CONSTRAINT fk_fa98ada799f853e7 FOREIGN KEY (user_model_id) REFERENCES user_model(id) ON DELETE CASCADE;
+
+
+--
+-- Name: fk_fa98ada7fe54d947; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY user_model_group
+    ADD CONSTRAINT fk_fa98ada7fe54d947 FOREIGN KEY (group_id) REFERENCES fos_group(id) ON DELETE CASCADE;
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+

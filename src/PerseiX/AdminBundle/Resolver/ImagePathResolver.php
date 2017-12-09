@@ -2,6 +2,7 @@
 
 namespace PerseiX\AdminBundle\Resolver;
 
+use Speicher210\CloudinaryBundle\Cloudinary\Cloudinary;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
@@ -13,32 +14,33 @@ class ImagePathResolver implements PathResolver
 	const DIR = 'uploads/movies';
 
 	/**
-	 * @var RequestStack
+	 * @var Cloudinary
 	 */
-	private $request;
+	private $cloudinary;
 
 	/**
 	 * ImagePathResolver constructor.
 	 *
-	 * @param RequestStack $request
+	 * @param Cloudinary $cloudinary
 	 */
-	public function __construct(RequestStack $request)
+	public function __construct(Cloudinary $cloudinary)
 	{
-		$this->request = $request->getCurrentRequest();
+		$this->cloudinary = $cloudinary;
 	}
 
 	/**
-	 * @param string|null $fileName
+	 * @param string|null $imagePublicId
 	 *
 	 * @return null|string
 	 */
-	public function resolve(string $fileName = null): ?string
+	public function resolve(string $imagePublicId = null): ?string
 	{
-		if (null === $fileName) {
+		if (null === $imagePublicId) {
 			return null;
 		}
-		$url = str_replace('app_dev.php', '', $this->request->getUriForPath(self::DIR . '/' . $fileName));
 
-		return $url;
+		$options = [];
+
+		return $this->cloudinary::cloudinary_url($imagePublicId, $options);
 	}
 }

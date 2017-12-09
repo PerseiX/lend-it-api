@@ -1,5 +1,5 @@
 <td>
     {% if value is not empty %}
-        <img style=" width: 120px;" src="{{ asset('uploads/movies/'~value) }}"/>
+        <img style=" width: 120px;" src="{{ cloudinary_url(value) }}"/>
     {% endif %}
 </td>

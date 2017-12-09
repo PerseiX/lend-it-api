@@ -33,6 +33,9 @@ class MoviesController extends AbstractApiController
 	 */
 	public function collectionAction(PaginatedRequest $paginatedRequest)
 	{
+//		print_r(cl_image_tag('uQnD9QnokQMPfkyZwXVkSmph9yh_wahgqe'));
+//		die;
+//		$this->get('speicher210_cloudinary.uploader')->getImage
 		$moviesQuery = $this->getDoctrine()->getRepository('PerseiXProjectBundle:Movie')->collectionQuery();
 
 		return $this->paginatedResponse(MovieCollection::class, $moviesQuery, $paginatedRequest);

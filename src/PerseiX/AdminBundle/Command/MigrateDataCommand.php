@@ -9,6 +9,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use PerseiX\ProjectBundle\Entity\Category;
 use PerseiX\ProjectBundle\Entity\Movie;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Class MigrateDataCommand
@@ -32,7 +33,7 @@ class MigrateDataCommand extends ContainerAwareCommand
 	private function migrateMovie(OutputInterface $output)
 	{
 		$em        = $this->getContainer()->get('doctrine.orm.entity_manager');
-		$moviePath = 'https://api.themoviedb.org/3/movie/popular?api_key=684c5d83e02a6730d4886694f0bc4fbe&language=pl-PL&page=2';
+		$moviePath = 'https://api.themoviedb.org/3/movie/popular?api_key=684c5d83e02a6730d4886694f0bc4fbe&language=pl-PL&page=1';
 
 		$guzzle        = $this->getContainer()->get('guzzle_client');
 		$movies        = $guzzle->get($moviePath)->getBody()->getContents();
@@ -47,12 +48,17 @@ class MigrateDataCommand extends ContainerAwareCommand
 			$filesystem = new Filesystem();
 			$filesystem->copy($imagePath, $dir . $movie->poster_path);
 
+			$file = new File($dir . $movie->poster_path);
+
+			$response = $this->getContainer()->get('speicher210_cloudinary.uploader')->upload($file);
+			$publicId = $response['public_id'];
+
 			$movieEntity = new Movie();
 			$movieEntity
 				->setActive(true)
 				->setReleasedAt(new \DateTime($movie->release_date))
 				->setDescription($movie->overview)
-				->setImagePath($fileName)
+				->setImagePath($publicId)
 				->setLanguage($movie->original_language)
 				->setTitle($movie->original_title);
 

@@ -1,7 +1,0 @@
-snc_redis:
-    clients:
-        cache:
-            type: predis
-            alias: cache
-            dsn: redis://localhost:6379
-            logging: true

@@ -10,6 +10,7 @@ class AppKernel extends Kernel
 		$bundles = [
 			new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 			new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+			new Speicher210\CloudinaryBundle\Speicher210CloudinaryBundle(),
 			new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
 			new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
 			new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
@@ -27,7 +28,6 @@ class AppKernel extends Kernel
 			new FOS\UserBundle\FOSUserBundle(),
 			new FOS\RestBundle\FOSRestBundle(),
 			new ApiBundle\ApiBundle(),
-			//			new Snc\RedisBundle\SncRedisBundle(),
 		];
 
 		$bundles = array_merge($bundles, [

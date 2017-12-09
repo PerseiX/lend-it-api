@@ -3,6 +3,7 @@
 namespace PerseiX\AdminBundle\Form\Type;
 
 use PerseiX\AdminBundle\Resolver\ImagePathResolver;
+use Speicher210\CloudinaryBundle\Cloudinary\Uploader;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -24,13 +25,20 @@ class UploadFileType extends FileType
 	private $rootDir;
 
 	/**
+	 * @var Uploader
+	 */
+	private $uploader;
+
+	/**
 	 * UploadFileType constructor.
 	 *
-	 * @param $rootDir
+	 * @param string   $rootDir
+	 * @param Uploader $uploader
 	 */
-	public function __construct($rootDir)
+	public function __construct(string $rootDir, Uploader $uploader)
 	{
-		$this->rootDir = $rootDir;
+		$this->rootDir  = $rootDir;
+		$this->uploader = $uploader;
 	}
 
 	/**
@@ -44,12 +52,10 @@ class UploadFileType extends FileType
 				$file = $event->getData();
 
 				if (true === $file instanceof UploadedFile) {
-					/** @var UploadedFile $file */
-					$dir  = $this->rootDir . '/../web/' . ImagePathResolver::DIR;
-					$path = md5($file->getClientOriginalName()) . '.' . $file->getClientOriginalExtension();
+					$response = $this->uploader->upload($file);
+					$publicId = $response['public_id'];
 
-					$file->move($dir, $path);
-					$event->setData($path);
+					$event->setData($publicId);
 				} else {
 					$event->setData($event->getForm()->getData());
 				}

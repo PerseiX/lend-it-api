@@ -3,10 +3,11 @@ services:
         class: PerseiX\AdminBundle\Form\Type\UploadFileType
         arguments:
             - '%kernel.root_dir%'
+            - '@speicher210_cloudinary.uploader'
         tags:
             - { name: 'form.type' }
 
     perseix_admin_resolver.image_path_resolver:
         class: PerseiX\AdminBundle\Resolver\ImagePathResolver
         arguments:
-            - '@request_stack'
+            - '@speicher210_cloudinary.cloudinary'

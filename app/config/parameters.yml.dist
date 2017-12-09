@@ -17,5 +17,10 @@ parameters:
     mailer_password: ~
     locale: pl
 
+    cloudinary_url: cloudinary://836619652526619:HMgR5c42aFkSQYdy95z3TzXo8tk@dizirqqvy
+    cloudinary_cloud_name: dizirqqvy
+    cloudinary_api_key: 836619652526619
+    cloudinary_api_secret: HMgR5c42aFkSQYdy95z3TzXo8tk
+
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt

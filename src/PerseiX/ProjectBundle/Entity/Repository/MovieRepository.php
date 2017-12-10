@@ -2,23 +2,23 @@
 
 namespace PerseiX\ProjectBundle\Entity\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use SortAndFilterBundle\Model\Repository\ApiRepository;
 use Doctrine\ORM\Query;
 
 /**
  * Class MovieRepository
  * @package PerseiX\ProjectBundle\Entity\Repository
  */
-class MovieRepository extends EntityRepository
+class MovieRepository extends ApiRepository
 {
 	/**
 	 * @return Query
 	 */
 	public function collectionQuery(): Query
 	{
-		$query = $this->createQueryBuilder('movie_repository')
-		              ->getQuery();
+		$qb = $this->createQueryBuilder('movie_repository');
+		$queryBuilder = $this->customerSorting->apply($qb);
 
-		return $query;
+		return $queryBuilder->getQuery();
 	}
 }

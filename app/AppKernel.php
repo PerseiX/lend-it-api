@@ -21,6 +21,7 @@ class AppKernel extends Kernel
 			new PerseiX\ProjectBundle\PerseiXProjectBundle(),
 			new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
 			new JMS\SerializerBundle\JMSSerializerBundle(),
+			new SortAndFilterBundle\SortAndFilterBundle(),
 			new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
 			new PerseiX\AdminBundle\PerseiXAdminBundle(),
 			new Symfony\Bundle\TwigBundle\TwigBundle(),

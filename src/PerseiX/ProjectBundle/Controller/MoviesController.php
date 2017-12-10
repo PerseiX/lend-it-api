@@ -9,6 +9,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use PerseiX\ProjectBundle\Entity\Movie;
 use PerseiX\ProjectBundle\Model\MovieCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use SortAndFilterBundle\Annotation\Sort;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -29,14 +30,13 @@ class MoviesController extends AbstractApiController
 	 * )
 	 *
 	 * @Scope(scope="category.movies", value="category.movies")
+	 * @Sort(availableField={"id", "releasedAt", "title"}, default="id", alias="movie_repository")
+	 *
 	 * @return Response
 	 */
 	public function collectionAction(PaginatedRequest $paginatedRequest)
 	{
-//		print_r(cl_image_tag('uQnD9QnokQMPfkyZwXVkSmph9yh_wahgqe'));
-//		die;
-//		$this->get('speicher210_cloudinary.uploader')->getImage
-		$moviesQuery = $this->getDoctrine()->getRepository('PerseiXProjectBundle:Movie')->collectionQuery();
+		$moviesQuery = $this->get('repository.movie')->collectionQuery();
 
 		return $this->paginatedResponse(MovieCollection::class, $moviesQuery, $paginatedRequest);
 	}
@@ -55,6 +55,7 @@ class MoviesController extends AbstractApiController
 	 *            "movieId" = "id"
 	 *        }
 	 * })
+	 *
 	 * @return Response
 	 */
 	public function singleAction(Movie $movie)

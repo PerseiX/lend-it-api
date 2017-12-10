@@ -15,14 +15,14 @@ security:
             security:   false
 
         api:
-            pattern: ^/api/*
-            anonymous: true
-
-        api:
             pattern:    ^/api/me
             fos_oauth:  true
             stateless:  true
             provider:   perseix_user_provider
+
+        api:
+            pattern: ^/api/*
+            anonymous: true
 
         sonata_admin:
             pattern: ^/

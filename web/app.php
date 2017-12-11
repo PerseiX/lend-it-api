@@ -1,6 +1,10 @@
 <?php
 
 use Symfony\Component\HttpFoundation\Request;
+//
+//header("Access-Control-Allow-Origin: *");
+//
+//header("Access-Control-Allow-Headers: Content-Type, origin");
 
 require __DIR__.'/../vendor/autoload.php';
 if (PHP_VERSION_ID < 70000) {

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0bbc819ed8a9a41352f41c0356bf07cf",
+    "content-hash": "dd55c9c0f1e353578ce44a1ee36ec74a",
     "packages": [
         {
             "name": "cloudinary/cloudinary_php",
@@ -2761,63 +2761,6 @@
             "time": "2017-12-05T06:14:09+00:00"
         },
         {
-            "name": "nelmio/cors-bundle",
-            "version": "1.5.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nelmio/NelmioCorsBundle.git",
-                "reference": "ac6576a599d7db9c2c6022602c188a5594216056"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/NelmioCorsBundle/zipball/ac6576a599d7db9c2c6022602c188a5594216056",
-                "reference": "ac6576a599d7db9c2c6022602c188a5594216056",
-                "shasum": ""
-            },
-            "require": {
-                "symfony/framework-bundle": "^2.7 || ^3.0"
-            },
-            "require-dev": {
-                "matthiasnoback/symfony-dependency-injection-test": "^0.7.6",
-                "mockery/mockery": "0.9.*"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.5.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Nelmio\\CorsBundle\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nelmio",
-                    "homepage": "http://nelm.io"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://github.com/nelmio/NelmioCorsBundle/contributors"
-                }
-            ],
-            "description": "Adds CORS (Cross-Origin Resource Sharing) headers support in your Symfony2 application",
-            "keywords": [
-                "api",
-                "cors",
-                "crossdomain"
-            ],
-            "time": "2017-04-24T09:12:42+00:00"
-        },
-        {
             "name": "ocramius/package-versions",
             "version": "1.2.0",
             "source": {
@@ -3030,16 +2973,16 @@
         },
         {
             "name": "persei/persei-sort-filter",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PerseiX/persei-sort-filter.git",
-                "reference": "048b0f5cc790b8540faa22d89b0489902812f489"
+                "reference": "30530cb1e33e51490d1ada50cae4243d19444711"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PerseiX/persei-sort-filter/zipball/048b0f5cc790b8540faa22d89b0489902812f489",
-                "reference": "048b0f5cc790b8540faa22d89b0489902812f489",
+                "url": "https://api.github.com/repos/PerseiX/persei-sort-filter/zipball/30530cb1e33e51490d1ada50cae4243d19444711",
+                "reference": "30530cb1e33e51490d1ada50cae4243d19444711",
                 "shasum": ""
             },
             "require": {
@@ -3063,10 +3006,10 @@
                 }
             ],
             "support": {
-                "source": "https://github.com/PerseiX/persei-sort-filter/tree/v1.0.1",
+                "source": "https://github.com/PerseiX/persei-sort-filter/tree/v1.0.2",
                 "issues": "https://github.com/PerseiX/persei-sort-filter/issues"
             },
-            "time": "2017-12-10T13:00:33+00:00"
+            "time": "2017-12-11T20:46:37+00:00"
         },
         {
             "name": "phar-io/manifest",

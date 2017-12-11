@@ -34,3 +34,18 @@ perseix_project_category_collection:
     requirements:
         limit: \d+
         page: \d+
+
+
+perseix_project_movies_collection_by_category_id:
+    path: /category/{categoryId}/movies
+    methods:
+        - GET
+    defaults:
+        _controller: PerseiXProjectBundle:Movies:moviesByCategory
+        _format: json
+        limit: 10
+        page: 10
+    requirements:
+        limit: \d+
+        page: \d+
+        categoryId: \d+

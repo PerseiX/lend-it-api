@@ -6,6 +6,7 @@ use ApiBundle\Annotation\Scope;
 use ApiBundle\Controller\AbstractApiController;
 use ApiBundle\Request\PaginatedRequest;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use PerseiX\ProjectBundle\Entity\Category;
 use PerseiX\ProjectBundle\Entity\Movie;
 use PerseiX\ProjectBundle\Model\MovieCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -34,7 +35,7 @@ class MoviesController extends AbstractApiController
 	 *
 	 * @return Response
 	 */
-	public function collectionAction(PaginatedRequest $paginatedRequest)
+	public function collectionAction(PaginatedRequest $paginatedRequest): Response
 	{
 		$moviesQuery = $this->get('repository.movie')->collectionQuery();
 
@@ -58,8 +59,35 @@ class MoviesController extends AbstractApiController
 	 *
 	 * @return Response
 	 */
-	public function singleAction(Movie $movie)
+	public function singleAction(Movie $movie): Response
 	{
 		return $this->representationResponse($this->transform($movie));
+	}
+
+	/**
+	 * @param Category         $category
+	 * @param PaginatedRequest $paginatedRequest
+	 *
+	 * @ApiDoc(
+	 *     section="Movies",
+	 *     resource=true,
+	 *     description="Get movies collection by category Id",
+	 *     output="PerseiX\UserBundle\Representation\MovieRepresentation",
+	 * )
+	 * @ParamConverter("category", options={
+	 *      "mapping": {
+	 *            "categoryId" = "id"
+	 *        }
+	 * })
+	 *
+	 * @return Response
+	 */
+	public function moviesByCategoryAction(Category $category, PaginatedRequest $paginatedRequest): Response
+	{
+		$moviesQuery = $this->get('repository.movie')->getMoviesQueryByCategory($category);
+
+		return $this->paginatedResponse(MovieCollection::class, $moviesQuery, $paginatedRequest, [
+			'categoryId' => $category->getId()
+		]);
 	}
 }

@@ -31,7 +31,7 @@ class MoviesController extends AbstractApiController
 	 * )
 	 *
 	 * @Scope(scope="category.movies", value="category.movies")
-	 * @Sort(availableField={"id", "releasedAt", "title"}, default="id", alias="movie_repository")
+	 * @Sort(availableField={"releasedAt", "title", "popularity"}, default="popularity", alias="movie_repository")
 	 *
 	 * @return Response
 	 */
@@ -79,6 +79,9 @@ class MoviesController extends AbstractApiController
 	 *            "categoryId" = "id"
 	 *        }
 	 * })
+	 *
+	 * @Scope(scope="category.movies", value="category.movies")
+	 * @Sort(availableField={"releasedAt", "title", "popularity"}, default="popularity", alias="movie_repository")
 	 *
 	 * @return Response
 	 */

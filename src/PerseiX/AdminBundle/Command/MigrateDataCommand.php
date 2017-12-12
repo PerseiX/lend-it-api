@@ -24,7 +24,7 @@ class MigrateDataCommand extends ContainerAwareCommand
 
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
-//		$this->migrateMovie($output);
+		$this->migrateMovie($output);
 //		$this->migrateCategory();
 		$em = $this->getContainer()->get('doctrine.orm.entity_manager');
 		$em->flush();
@@ -33,7 +33,7 @@ class MigrateDataCommand extends ContainerAwareCommand
 	private function migrateMovie(OutputInterface $output)
 	{
 		$em        = $this->getContainer()->get('doctrine.orm.entity_manager');
-		$moviePath = 'https://api.themoviedb.org/3/movie/popular?api_key=684c5d83e02a6730d4886694f0bc4fbe&language=pl-PL&page=1';
+		$moviePath = 'https://api.themoviedb.org/3/movie/popular?api_key=684c5d83e02a6730d4886694f0bc4fbe&language=pl-PL&page=5';
 
 		$guzzle        = $this->getContainer()->get('guzzle_client');
 		$movies        = $guzzle->get($moviePath)->getBody()->getContents();
@@ -60,7 +60,8 @@ class MigrateDataCommand extends ContainerAwareCommand
 				->setDescription($movie->overview)
 				->setImagePath($publicId)
 				->setLanguage($movie->original_language)
-				->setTitle($movie->original_title);
+				->setTitle($movie->original_title)
+				->setPopularity($movie->popularity);
 
 			foreach ($movie->genre_ids as $genre) {
 				$category = $em->getRepository('PerseiXProjectBundle:Category')->findOneBy(['id' => $genre]);

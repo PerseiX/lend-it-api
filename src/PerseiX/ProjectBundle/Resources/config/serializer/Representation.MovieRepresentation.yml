@@ -11,6 +11,16 @@ PerseiX\ProjectBundle\Representation\MovieRepresentation:
             accessor:
                 getter: getTitle
 
+        popularity:
+            type: float
+            accessor:
+                getter: getPopularity
+
+        language:
+            type: string
+            accessor:
+                getter: getLanguage
+
         description:
             type: string
             accessor:

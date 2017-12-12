@@ -46,6 +46,16 @@ class MovieRepresentation implements RepresentationInterface
 	private $categories;
 
 	/**
+	 * @var float
+	 */
+	private $popularity;
+
+	/**
+	 * @var string
+	 */
+	private $language;
+
+	/**
 	 * Movie2Representation constructor.
 	 */
 	public function __construct()
@@ -190,6 +200,46 @@ class MovieRepresentation implements RepresentationInterface
 	public function setCategories(CategoryRepresentation $categoryRepresentation = null): MovieRepresentation
 	{
 		$this->categories[] = $categoryRepresentation;
+
+		return $this;
+	}
+
+	/**
+	 * @return float|null
+	 */
+	public function getPopularity(): ?float
+	{
+		return $this->popularity;
+	}
+
+	/**
+	 * @param float|null $popularity
+	 *
+	 * @return MovieRepresentation
+	 */
+	public function setPopularity(float $popularity = null): MovieRepresentation
+	{
+		$this->popularity = $popularity;
+
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getLanguage(): ?string
+	{
+		return $this->language;
+	}
+
+	/**
+	 * @param string|null $language
+	 *
+	 * @return MovieRepresentation
+	 */
+	public function setLanguage(string $language = null): MovieRepresentation
+	{
+		$this->language = $language;
 
 		return $this;
 	}

@@ -54,6 +54,13 @@ class Movie
 	private $language;
 
 	/**
+	 * @var float
+	 *
+	 * @ORM\Column(type="float", nullable=true)
+	 */
+	private $popularity;
+
+	/**
 	 * @var ArrayCollection[Category]|null
 	 *
 	 * @ORM\ManyToMany(targetEntity="PerseiX\ProjectBundle\Entity\Category", mappedBy="movies")
@@ -203,6 +210,26 @@ class Movie
 			$this->categories->removeElement($category);
 			$category->removeMovie($this);
 		}
+
+		return $this;
+	}
+
+	/**
+	 * @return float
+	 */
+	public function getPopularity(): float
+	{
+		return $this->popularity;
+	}
+
+	/**
+	 * @param float $popularity
+	 *
+	 * @return Movie
+	 */
+	public function setPopularity(float $popularity): Movie
+	{
+		$this->popularity = $popularity;
 
 		return $this;
 	}

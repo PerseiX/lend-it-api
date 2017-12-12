@@ -20,6 +20,7 @@ class MovieAdmin extends AbstractAdmin
 			->add('title', 'text')
 			->add('description', 'text')
 			->add('releasedAt', 'date')
+			->add('popularity', 'text')
 			->add('categories', 'sonata_type_model', [
 				'multiple'     => true,
 				'by_reference' => false

@@ -57,7 +57,9 @@ class MovieTransformer extends AbstractTransformer
 		               ->setDescription($input->getDescription())
 		               ->setImagePath($this->imagePathResolver->resolve($input->getImagePath()))
 		               ->setReleasedAt($input->getReleasedAt())
-		               ->setTitle($input->getTitle());
+		               ->setTitle($input->getTitle())
+		               ->setLanguage($input->getLanguage())
+		               ->setPopularity($input->getPopularity());
 
 		/** @var Category $category */
 		foreach ($input->getCategories() as $category) {

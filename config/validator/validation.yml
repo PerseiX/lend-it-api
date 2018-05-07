@@ -1,0 +1,30 @@
+App\Model\RegistryModel:
+    properties:
+        email:
+            - NotBlank: ~
+            - NotNull: ~
+            - Email: ~
+            - App\Validator\Constraints\UniqueField:
+                entityClass: App\Entity\UserModel
+                field: email
+
+        username:
+            - NotBlank: ~
+            - NotNull: ~
+            - Length:
+                min: 4
+                max: 16
+                minMessage: "Login jest zbyt krótki. Minimalna liczba znaków wynosi 4."
+                maxMessage: "Login jest zbyt długi. Maksymalna liczba znaków wynosi 16."
+            - App\Validator\Constraints\UniqueField:
+                entityClass: App\Entity\UserModel
+                field: username
+
+        password:
+            - NotBlank: ~
+            - NotNull: ~
+            - Length:
+                min: 6
+                max: 16
+                minMessage: "Hasło jest zbyt krótki. Minimalna liczba znaków wynosi 6."
+                maxMessage: "Hasło jest zbyt długi. Maksymalna liczba znaków wynosi 16."

@@ -49,3 +49,19 @@ perseix_project_movies_collection_by_category_id:
         limit: \d+
         page: \d+
         categoryId: \d+
+
+user_me:
+    path: /api/me
+    methods:
+        - POST
+    defaults:
+        _controller:  App\Controller\PerseixUserController::meAction
+        _format: json
+
+user_registry:
+    path: /api/registry
+    methods:
+        - POST
+    defaults:
+        _controller: App\Controller\PerseixUserController::registryAction
+        _format: json

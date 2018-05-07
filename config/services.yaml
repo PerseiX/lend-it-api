@@ -55,3 +55,41 @@ services:
         arguments:
             - '@speicher210_cloudinary.cloudinary'
 
+    perseix_admin_admin.category_admin:
+        class: App\Admin\CategoryAdmin
+        arguments:
+            - ~
+            - App\Entity\Category
+            - ~
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Category }
+
+    perseix_admin_admin.movie_admin:
+        class: App\Admin\MovieAdmin
+        arguments:
+            - ~
+            - App\Entity\Movie
+            - ~
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Movie }
+
+
+    perseix_user_manager.reqistry_manager:
+        class: App\Manager\RegistryManager
+        public: true
+        arguments:
+            - '@fos_user.user_manager.default'
+            - '@perseix_user_service.registration'
+
+    perseix_user_service.registration:
+        class: App\Service\Registration
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@security.encoder_factory'
+
+    perseix_user_validator.unique_field:
+        class: App\Validator\Constraints\UniqueFieldValidator
+        arguments:
+            - '@doctrine.orm.entity_manager'
+        tags:
+            - { name: validator.constraint_validator }

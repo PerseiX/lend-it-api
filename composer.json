@@ -16,6 +16,7 @@
 		"persei/persei-api": "2.0.*",
 		"persei/persei-sort-filter": "2.0.*",
 		"sensio/framework-extra-bundle": "^5.1",
+		"sonata-project/doctrine-orm-admin-bundle": "^3.6",
 		"speicher210/cloudinary-bundle": "^0.8.0",
 		"symfony/asset": "^4.0",
 		"symfony/console": "^4.0",

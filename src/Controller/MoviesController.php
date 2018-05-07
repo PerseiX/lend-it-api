@@ -21,7 +21,6 @@ use Symfony\Component\HttpFoundation\Response;
 class MoviesController extends AbstractApiController
 {
 	/**
-
 	 * @param PaginatedRequest $paginatedRequest
 	 *
 	 * @Operation(

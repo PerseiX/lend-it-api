@@ -89,6 +89,6 @@ class UploadFileType extends FileType
 	 */
 	public function getParent()
 	{
-		return 'file';
+		return FileType::class;
 	}
 }

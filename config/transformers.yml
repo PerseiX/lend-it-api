@@ -29,3 +29,8 @@ services:
         parent: 'api.abstract_transformer_scope'
         tags:
             - { name: api.transformer_scope }
+
+    perseix_user_transformer.user_transformer:
+        class: App\Transformer\UserTransformer
+        tags:
+            - { name: api.transformer }

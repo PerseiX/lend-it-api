@@ -1,0 +1,69 @@
+{% block fos_user_content %}
+    <style>.form-content {
+            /*width: 100%;*/
+            /*height: 100%;*/
+            margin: 0 auto;
+            max-width: 500px;
+            max-height: 600px;
+            background: linear-gradient(to bottom, #4d8083, #bab7c1);
+            color: white;
+            text-align: center;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            border-radius: 15px;
+        }
+
+        .form {
+            width: 400px;
+            padding-top: 40px;
+            border: 0;
+            margin: 0 auto;
+        }
+
+        input {
+            border: 0;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            margin-top: 10px;
+            width: 300px;
+            height: 30px;
+            padding-left: 20px;
+        }
+
+        input[name="_submit"] {
+            padding: 0;
+            width: 150px;
+            margin-top: 60px;
+            background-color: #b5b6f9;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        label {
+            font-size: 26px;
+        }
+
+        .error-message {
+            color: #590000;
+            font-size: 23px;
+        }</style>
+    <div class="form-content">
+        <form class="form" action="{{ path("fos_user_security_check") }}" method="post">
+            {% if csrf_token %}
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+            {% endif %}
+
+            <label for="username">Username</label>
+            <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Username" required="required"/>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="_password" placeholder="Password" required="required"/>
+
+            <input type="submit" id="_submit" name="_submit" value="Login"/>
+        </form>
+        {% if error %}
+            <div class="error-message">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+    </div>
+{% endblock fos_user_content %}

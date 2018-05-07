@@ -1,0 +1,19 @@
+services:
+    repository.movie: &DEFULT_REPOSITORY
+        class: Doctrine\ORM\EntityRepository
+        factory:
+            - '@doctrine.orm.entity_manager'
+            - getRepository
+        arguments:
+            - 'App:Movie'
+        tags:
+            - { name: api.sort_and_filtered_repository }
+        public: true
+
+
+    repository.category:
+        <<: *DEFULT_REPOSITORY
+        class: Doctrine\ORM\EntityRepository
+        arguments:
+            - 'App:Category'
+

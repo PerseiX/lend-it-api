@@ -1,0 +1,9 @@
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: App\Entity\UserModel
+    from_email:
+        address: you@example.com
+        sender_name: PerseiX
+    group:
+        group_class: App\Entity\Group

@@ -1,0 +1,31 @@
+services:
+    perseix_transformer.movie_transformer:
+        class: App\Transformer\MovieTransformer
+        tags:
+            - { name: api.transformer }
+        calls:
+            - ['setImagePathResolver', ['@perseix_admin_resolver.image_path_resolver']]
+
+    preseix_transformer_collection.movie_collection_transformer:
+        class: App\Transformer\Collection\MovieCollectionTransformer
+        parent: 'abstract.transformer'
+        public: true
+        tags:
+            - { name: api.transformer }
+
+    perseix_transformer.category_transformer:
+        class: App\Transformer\CategoryTransformer
+        tags:
+            - { name: api.transformer }
+
+    preseix_transformer_collection.category_collection_transformer:
+        class: App\Transformer\Collection\CategoryCollectionTransformer
+        parent: 'abstract.transformer'
+        tags:
+            - { name: api.transformer }
+
+    preseix_transformer_scope_category.movie_scope:
+        class: App\Transformer\Scope\Category\MovieScope
+        parent: 'api.abstract_transformer_scope'
+        tags:
+            - { name: api.transformer_scope }

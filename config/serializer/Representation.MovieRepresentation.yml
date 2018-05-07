@@ -1,0 +1,62 @@
+App\Representation\MovieRepresentation:
+    exclusion_policy: ALL
+    properties:
+        id:
+            type: integer
+            accessor:
+                getter: getId
+
+        title:
+            type: string
+            accessor:
+                getter: getTitle
+
+        popularity:
+            type: float
+            accessor:
+                getter: getPopularity
+
+        language:
+            type: string
+            accessor:
+                getter: getLanguage
+
+        description:
+            type: string
+            accessor:
+                getter: getDescription
+
+        releasedAt:
+            type: DateTime<'Y-m-d'>
+            expose: true
+            accessor:
+                getter: getReleasedAt
+
+        imagePath:
+            type: string
+            accessor:
+                getter: getImagePath
+
+        categoriesIds:
+            type: array
+            accessor:
+                getter: getCategoriesIds
+
+    relations:
+        -
+            rel: categories
+            embedded:
+                content: expr(object.getCategories())
+            exclusion:
+                groups: [category.movies]
+                exclude_if: expr(!object.getCategories())
+
+        -
+            rel: self
+            href:
+                route: perseix_project_single_movie
+                parameters:
+                    movieId: expr(object.getId())
+                generator: default
+                absolute: true
+

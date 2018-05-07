@@ -1,0 +1,8 @@
+speicher210_cloudinary:
+    url: '%cloudinary_url%'
+    cloud_name: '%cloudinary_cloud_name%'
+    access_identifier:
+        api_key: '%cloudinary_api_key%'
+        api_secret: '%cloudinary_api_secret%'
+    options:
+        secure: true

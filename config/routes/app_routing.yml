@@ -1,0 +1,51 @@
+perseix_project_movies:
+    path: /api/movies
+    methods:
+        - GET
+    defaults:
+        _controller: App\Controller\MoviesController::collectionAction
+        _format: json
+        limit: 10
+        page: 10
+    requirements:
+        limit: \d+
+        page: \d+
+
+perseix_project_single_movie:
+    path: /api/movie/{movieId}
+    methods:
+        - GET
+    defaults:
+        _controller: App\Controller\MoviesController::singleAction
+        _format: json
+    requirements:
+        movieId: \d+
+
+
+perseix_project_category_collection:
+    path: /api/categories
+    methods:
+        - GET
+    defaults:
+        _controller: App\Controller\CategoryController::collectionAction
+        _format: json
+        limit: 10
+        page: 10
+    requirements:
+        limit: \d+
+        page: \d+
+
+
+perseix_project_movies_collection_by_category_id:
+    path: /api/category/{categoryId}/movies
+    methods:
+        - GET
+    defaults:
+        _controller: App\Controller\MoviesController::moviesByCategoryAction
+        _format: json
+        limit: 10
+        page: 10
+    requirements:
+        limit: \d+
+        page: \d+
+        categoryId: \d+

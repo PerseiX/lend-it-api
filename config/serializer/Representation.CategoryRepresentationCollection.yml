@@ -1,0 +1,2 @@
+App\Representation\CategoryRepresentationCollection:
+    exclusion_policy: ALL
